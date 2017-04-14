@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 15:59:44
+* @Last Modified time: 2017-04-14 19:36:56
 */
 
 'use strict';
@@ -126,7 +126,7 @@ $(document).ready(function(){
         if(time < 0) time = 0;
         var time_text = numFixed(Math.floor(time / 60), 2) + ":" + numFixed((time % 60), 2);
         time_range_tip_text.html(time_text);
-        time_range_tip.css("left", (pageX - time_range_tip.width() / 2) + "px");
+        time_range_tip.css("left", (pageX - $(".control-panel").offset().left - time_range_tip.width() / 2) + "px");
         time_range_tip.show();
     }
     var hide_time_tip = function(e){
@@ -158,7 +158,8 @@ $(document).ready(function(){
 
     //playmode
     $('.play_mode').on('click', function(){
-        var mode_num = ++(music_list.play_mode);
+        music_list.play_mode = (music_list.play_mode + 1) % 3;
+        var mode_num = music_list.play_mode;
         mode_num = mode_num > 2 ? 0 : mode_num;
         $(this).children("span").attr('class', 'icon-'+modes[mode_num]);
         localStorage.play_mode = mode_num;
@@ -198,13 +199,34 @@ $(document).ready(function(){
         }
     })
 
-
-    var list_shown = false;
-    $('.music_list_control').on('click',function(){
-        if(list_shown) return;
+    var hide_music_list = function(music_list_view){
+        music_list_view.animate({
+            height: 0,
+            width: 0
+        }, 500, function(){
+            music_list_view.hide();
+            this.setAttribute("aria-hidden", "true");
+        });
+    }
+    var show_music_list = function(music_list_view){
+        music_list_view.show();
+        music_list_view.animate({
+            height: "400px",
+            width: "800px"
+        }, 500, function(){
+            this.setAttribute("aria-hidden", "false");
+        });
+    }
+    $('.music_list .close').bind('click', function(){
+        hide_music_list($('.music_list'));
+    })
+    $('.music_list_control').bind('click',function(){
+        var music_list_view = $('.music_list');
+        if(music_list_view.attr("aria-hidden") == "true"){
+            show_music_list(music_list_view);
+        }
         else{
-            //set position of music_list?
-            //show music_list
+            hide_music_list(music_list_view);
         }
     });
 });

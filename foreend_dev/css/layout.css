@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 08:13:01
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 09:46:05
+* @Last Modified time: 2017-04-14 18:40:27
 */
 body{
     overflow-y: hidden;
@@ -32,7 +32,6 @@ body{
     bottom: 50px;
     width: 100%;
 }
-
 .control{
     user-select: none;
     position: absolute;
@@ -42,8 +41,8 @@ body{
     line-height: 50px;
     height: 50px;
 
-    box-sizing: border-box;
-    padding: 0 10px;
+    width: 100%;
+    text-align: center;
 
     background-color: #f63;
 }

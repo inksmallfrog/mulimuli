@@ -1,6 +1,123 @@
-/*
-* @Author: inksmallfrog
-* @Date:   2017-04-06 07:53:44
-* @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-06 08:17:57
-*/
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?xxv9zj');
+  src:  url('fonts/icomoon.eot?xxv9zj#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?xxv9zj') format('truetype'),
+    url('fonts/icomoon.woff?xxv9zj') format('woff'),
+    url('fonts/icomoon.svg?xxv9zj#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-color-select:before {
+  content: "\e900";
+}
+.icon-home:before {
+  content: "\e902";
+}
+.icon-list:before {
+  content: "\e922";
+}
+.icon-spinner:before {
+  content: "\e97a";
+}
+.icon-spinner1:before {
+  content: "\e97b";
+}
+.icon-spinner2:before {
+  content: "\e97c";
+}
+.icon-spinner3:before {
+  content: "\e97f";
+}
+.icon-spinner4:before {
+  content: "\e984";
+}
+.icon-config:before {
+  content: "\e994";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+.icon-heart:before {
+  content: "\e9da";
+}
+.icon-heart-broken:before {
+  content: "\e9db";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-play:before {
+  content: "\ea15";
+}
+.icon-pause:before {
+  content: "\ea16";
+}
+.icon-previous:before {
+  content: "\ea18";
+}
+.icon-next:before {
+  content: "\ea19";
+}
+.icon-volume-high:before {
+  content: "\ea26";
+}
+.icon-volume-medium:before {
+  content: "\ea27";
+}
+.icon-volume-low:before {
+  content: "\ea28";
+}
+.icon-volume-mute:before {
+  content: "\ea29";
+}
+.icon-volume-blocked:before {
+  content: "\ea2a";
+}
+.icon-loop:before {
+  content: "\ea2e";
+}
+.icon-infinite:before {
+  content: "\ea2f";
+}
+.icon-shuffle:before {
+  content: "\ea30";
+}
+.icon-arrow-down:before {
+  content: "\ea36";
+}
+.icon-arrow-left:before {
+  content: "\ea38";
+}
+.icon-arrow-down2:before {
+  content: "\ea3e";
+}
+.icon-arrow-left2:before {
+  content: "\ea40";
+}
+.icon-font-size:before {
+  content: "\ea61";
+}
+.icon-text-place:before {
+  content: "\ea65";
+}
+

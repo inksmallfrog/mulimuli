@@ -2,8 +2,14 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 08:51:51
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 15:04:22
+* @Last Modified time: 2017-04-14 18:52:13
 */
+.control-panel{
+    position: relative;
+    width: 1280px;
+    min-width: 980px;
+    display: inline-block;
+}
 #music_favicon{
     position: relative;
     display: inline-block;
@@ -106,7 +112,7 @@
     margin-left: -2.5px;
 }
 #time_range{
-    width: 60%;
+    width: 55%;
 }
 .time_tip{
     vertical-align: middle;
@@ -171,6 +177,15 @@
 }
 #volume_range{
     width: 5%;
+}
+.music_list{
+    position: absolute;
+    bottom: 50px;
+    right: 8px;
+    width: 800px;
+    height: 400px;
+    background: green;
+    z-index: 10;
 }
 .music_list_control{
     background: none;

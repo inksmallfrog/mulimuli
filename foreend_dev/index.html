@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/layout.css">
         <link rel="stylesheet" href="css/fly.css">
         <link rel="stylesheet" href="css/control.css">
+        <link rel="stylesheet" href="css/music_list.css">
     </head>
     <body>
         <!--网站内容区域-->
@@ -31,45 +32,83 @@
         </div>
         <!--End-->
 
-        <!--音乐列表-->
-        <div id="music_list"></div>
-        <!--End-->
-
         <!--控制板-->
         <div class="control">
-            <a href="javascript:void(0)" id="music_favicon">
-                <img src="assets/test.jpg" alt="music_favicon">
-            </a>
-            <button class="control_item pointer" id="previous">
-                <span class="icon-previous"></span>
-            </button>
-            <button class="control_item pointer" id="playorpause">
-                <span class="icon-play"></span>
-            </button>
-            <button class="control_item pointer" id="next">
-                <span class="icon-next"></span>
-            </button>
-            <div class="time_bar_tip">
-                <p></p>
-                <div class="bottom_triangle"></div>
+            <div class="control-panel">
+                <a href="javascript:void(0)" id="music_favicon">
+                    <img src="assets/test.jpg" alt="music_favicon">
+                </a>
+                <button class="control_item pointer" id="previous">
+                    <span class="icon-previous"></span>
+                </button>
+                <button class="control_item pointer" id="playorpause">
+                    <span class="icon-play"></span>
+                </button>
+                <button class="control_item pointer" id="next">
+                    <span class="icon-next"></span>
+                </button>
+                <div class="time_bar_tip">
+                    <p></p>
+                    <div class="bottom_triangle"></div>
+                </div>
+                <div class="" id="time_range"></div>
+                <span class="time_tip" id="c_time">00:00</span>
+                <span class="time_tip" id="a_time">/ 00:00</span>
+                <button class="switch on pointer" id="fly_control">
+                    <div id="fly_tip">弹</div>
+                    <p>ON</p>
+                </button>
+                <button class="play_mode pointer">
+                    <span class="icon-loop"></span>
+                </button>
+                <button class="volume_control pointer">
+                    <span class="icon-volume-high"></span>
+                </button>
+                <div class="" id="volume_range"></div>
+                <!--音乐列表-->
+                <div class="music_list" aria-hidden = "false">
+                    <div class="header">
+                        <p class="title">播放列表(n)</p>
+                        <button class="mark_all pointer small_font">添加收藏</button>
+                        <button class="clear_all pointer small_font">清空全部</button>
+                        <button class="close pointer"><span class="icon-cross"></span></button>
+                    </div>
+                    <ul class="music_ul">
+                        <li class="current music_item">
+                            <div class="mark_icon"><span class="icon-heart"></span></div>
+                            <p class="music_title">团子大家族</p>
+                            <p class="music_author">Key</p>
+                            <p class="music_duration">5:03</p>
+                            <button class="heart pointer"><span class="icon-heart"></span></button>
+                            <button class="mark pointer"><span class="icon-heart"></span></button>
+                            <button class="delete pointer"><span class="icon-heart"></span></button>
+                        </li>
+                        <li class="music_item">
+                            <div class="mark_icon"><span class="icon-heart"></span></div>
+                            <p class="music_title">团子大家族</p>
+                            <p class="music_author">Key</p>
+                            <p class="music_duration">5:03</p>
+                            <button class="heart pointer"><span class="icon-heart"></span></button>
+                            <button class="mark pointer"><span class="icon-heart"></span></button>
+                            <button class="delete pointer"><span class="icon-heart"></span></button>
+                        </li>
+                        <li class="music_item">
+                            <div class="mark_icon"><span class="icon-heart"></span></div>
+                            <p class="music_title">团子大家族</p>
+                            <p class="music_author">Key</p>
+                            <p class="music_duration">5:03</p>
+                            <button class="heart pointer"><span class="icon-heart"></span></button>
+                            <button class="mark pointer"><span class="icon-heart"></span></button>
+                            <button class="delete pointer"><span class="icon-heart"></span></button>
+                        </li>
+                    </ul>
+                    <div class="bottom_triangle"></div>
+                </div>
+                <!--End-->
+                <button class="music_list_control pointer">
+                    <span class="icon-list"></span>
+                </button>
             </div>
-            <div class="" id="time_range"></div>
-            <span class="time_tip" id="c_time">00:00</span>
-            <span class="time_tip" id="a_time">/ 00:00</span>
-            <button class="switch on pointer" id="fly_control">
-                <div id="fly_tip">弹</div>
-                <p>ON</p>
-            </button>
-            <button class="play_mode pointer">
-                <span class="icon-loop"></span>
-            </button>
-            <button class="volume_control pointer">
-                <span class="icon-volume-high"></span>
-            </button>
-            <div class="" id="volume_range"></div>
-            <button class="music_list_control pointer">
-                <span class="icon-list"></span>
-            </button>
         </div>
         <!--End-->
 

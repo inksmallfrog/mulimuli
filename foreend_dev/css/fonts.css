@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-10 11:23:32
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-10 11:26:29
+* @Last Modified time: 2017-04-14 18:13:12
 */
 @font-face {
   font-family: 'icomoon';
@@ -38,6 +38,9 @@
 }
 .icon-list:before {
   content: "\e922";
+}
+.icon-cross:before {
+  content: "\ea0f";
 }
 .icon-spinner:before {
   content: "\e97a";

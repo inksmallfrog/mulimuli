@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 06:33:57
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 16:10:18
+* @Last Modified time: 2017-04-14 17:31:10
 */
 .pointer:hover{
     cursor: pointer;
@@ -30,6 +30,7 @@ button:disabled{
     height: 4px;
     top: 50%;
     left: 0;
+    border-radius: 10px;
     margin-top: -2px;
     width: 0;
     background-color: #336;
@@ -39,18 +40,20 @@ button:disabled{
     height: 4px;
     top: 50%;
     left: 0;
+    border-radius: 10px;
     margin-top: -2px;
     width: 100%;
     background-color: #999;
 }
 .range.horizental .point{
+    box-sizing: border-box;
     position: absolute;
-    height: 10px;
-    width: 10px;
+    height: 12px;
+    width: 12px;
     top: 50%;
-    margin-top: -8px;
+    margin-top: -6px;
     left: -5px;
     border-radius: 100%;
-    border: #c3a solid 3px;
-    background: white;
+    border: white solid 4px;
+    background: #3c7;
 }

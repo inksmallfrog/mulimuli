@@ -1,0 +1,89 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-14 18:04:39
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-14 19:31:50
+*/
+.music_list .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px black solid;
+    padding: 0 20px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.music_list .header p{
+    flex-grow: 20;
+}
+
+.music_list button{
+    font-size: 20px;
+    background: none;
+    vertical-align: middle;
+    flex-grow: 0;
+}
+
+.music_list .small_font{
+    font-size: 10px;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.music_list button span{
+    line-height: 30px;
+}
+
+.music_list .bottom_triangle{
+    position: absolute;
+    right: 33px;
+    bottom: -20px;
+    border-left: transparent solid 10px;
+    border-right: transparent solid 10px;
+    border-top: green 10px solid;
+    border-bottom: transparent 10px solid;
+}
+
+.music_item{
+    height: 18px;
+    line-height: 18px;
+    display: flex;
+    padding: 3px 20px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+.music_item:hover{
+    cursor: pointer;
+    background: white;
+}
+.music_item .mark_icon{
+    flex-grow: 1;
+    visibility: hidden;
+    margin-right: -18px;
+}
+.music_item.current .mark_icon{
+    visibility:visible;
+}
+.music_item .music_title{
+    flex-grow: 8;
+}
+.music_item .music_author{
+    flex-grow: 3;
+}
+.music_item .music_duration{
+    flex-grow: 2;
+}
+.music_item button{
+    flex-grow: 0;
+    margin: 0 10px;
+    text-align: right;
+}
+.music_item button:last-child{
+    margin-right: 0;
+}
+.music_item button:hover{
+    color: #666;
+}
