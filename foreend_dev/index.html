@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/fonts.css">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/layout.css">
+        <link rel="stylesheet" href="css/fly.css">
+        <link rel="stylesheet" href="css/control.css">
+    </head>
+    <body>
+        <!--网站内容区域-->
+        <iframe src="music_page.html" frameborder="0" id="page"></iframe>
+        <!--End-->
+
+        <!--当前音乐区-->
+        <section class="current_music" aria-hidden="true">
+
+        </section>
+        <!--End-->
+
+        <!--隐藏的音频内容-->
+        <audio src="test.mp3"></audio>
+        <!--End-->
+
+        <!--弹幕发送-->
+        <div class="fly">
+            <input type="text" placeholder="点我输入您的弹幕～" title="弹幕输入栏"><button>发送</button>
+        </div>
+        <!--End-->
+
+        <!--音乐列表-->
+        <div id="music_list"></div>
+        <!--End-->
+
+        <!--控制板-->
+        <div class="control">
+            <a href="javascript:void(0)" id="music_favicon">
+                <img src="assets/test.jpg" alt="music_favicon">
+            </a>
+            <button class="control_item pointer" id="previous">
+                <span class="icon-previous"></span>
+            </button>
+            <button class="control_item pointer" id="playorpause">
+                <span class="icon-play"></span>
+            </button>
+            <button class="control_item pointer" id="next">
+                <span class="icon-next"></span>
+            </button>
+            <div class="time_bar_tip">
+                <p></p>
+                <div class="bottom_triangle"></div>
+            </div>
+            <div class="" id="time_range"></div>
+            <span class="time_tip" id="c_time">00:00</span>
+            <span class="time_tip" id="a_time">/ 00:00</span>
+            <button class="switch on pointer" id="fly_control">
+                <div id="fly_tip">弹</div>
+                <p>ON</p>
+            </button>
+            <button class="play_mode pointer">
+                <span class="icon-loop"></span>
+            </button>
+            <button class="volume_control pointer">
+                <span class="icon-volume-high"></span>
+            </button>
+            <div class="" id="volume_range"></div>
+            <button class="music_list_control pointer">
+                <span class="icon-list"></span>
+            </button>
+        </div>
+        <!--End-->
+
+        <script src="js/jquery-3.2.0.js"></script>
+        <script src="js/rangebar.js"></script>
+        <script src="js/musiclist.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
+

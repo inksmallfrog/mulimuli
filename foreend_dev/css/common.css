@@ -1,0 +1,56 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-14 06:33:57
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-14 16:10:18
+*/
+.pointer:hover{
+    cursor: pointer;
+}
+button:disabled{
+    color: #ccc !important;
+}
+.range.horizental{
+    position: relative;
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+    background: none;
+    margin: 0 10px;
+}
+.range.horizental .track{
+    position: absolute;
+    height: 10px;
+    top: 50%;
+    margin-top: -5px;
+    width: 100%;
+}
+.range.horizental .loaded_line{
+    position: absolute;
+    height: 4px;
+    top: 50%;
+    left: 0;
+    margin-top: -2px;
+    width: 0;
+    background-color: #336;
+}
+.range.horizental .track_line{
+    position: absolute;
+    height: 4px;
+    top: 50%;
+    left: 0;
+    margin-top: -2px;
+    width: 100%;
+    background-color: #999;
+}
+.range.horizental .point{
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 50%;
+    margin-top: -8px;
+    left: -5px;
+    border-radius: 100%;
+    border: #c3a solid 3px;
+    background: white;
+}

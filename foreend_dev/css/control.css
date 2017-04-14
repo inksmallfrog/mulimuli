@@ -1,0 +1,182 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-06 08:51:51
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-14 15:04:22
+*/
+#music_favicon{
+    position: relative;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+#music_favicon img{
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+}
+.control_item{
+    position: relative;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    background: transparent;
+    color: white;
+}
+.control_item span{
+    font-size: 25px;
+}
+.control_item#playorpause{
+    width: 35px;
+    height: 35px;
+}
+.control_item#playorpause span{
+    font-size: 35px;
+}
+#previous .vertical{
+    position: absolute;
+    height: 14px;
+    width: 2px;
+    background: white;
+    left: 6px;
+    top: 5px;
+}
+#previous .left_triangle{
+    position: absolute;
+    border-top: transparent solid 8px;
+    border-right: white solid 9px;
+    border-bottom: transparent solid 8px;
+    top: 4px;
+    left: 8px;
+}
+#playorpause .play{
+    position: absolute;
+    border-top: transparent solid 12px;
+    border-left: white solid 20px;
+    border-bottom: transparent solid 12px;
+    top: 5px;
+    left: 9px;
+}
+#playorpause .pause{
+    position: absolute;
+    width: 13px;
+    height: 23px;
+    border-right: white solid 2px;
+    border-left: white solid 2px;
+    top: 5px;
+    left: 8px;
+}
+#next .right_triangle{
+    position: absolute;
+    border-top: transparent solid 8px;
+    border-left: white solid 9px;
+    border-bottom: transparent solid 8px;
+    top: 4px;
+    left: 5.5px;
+}
+#next .vertical{
+    position: absolute;
+    height: 14px;
+    width: 2px;
+    background: white;
+    right: 6px;
+    top: 5px;
+}
+.time_bar_tip{
+    position: absolute;
+    display: none;
+    top: -8px;
+    line-height: 25px;
+}
+.time_bar_tip p{
+    width: 50px;
+    text-align: center;
+    background-color: yellow;
+}
+.time_bar_tip .bottom_triangle{
+    position: absolute;
+    border-top: 5px solid yellow;
+    border-right: transparent 5px solid;
+    border-left: transparent 5px solid;
+    border-bottom: transparent 5px solid;
+    left: 50%;
+    margin-left: -2.5px;
+}
+#time_range{
+    width: 60%;
+}
+.time_tip{
+    vertical-align: middle;
+    color: #eee;
+    font-size: 10px;
+}
+.switch{
+    position: relative;
+    width: 55px;
+    height: 25px;
+    vertical-align: middle;
+    border-radius: 20px;
+    margin: 0 10px;
+    box-shadow: 1px 1px 3px rgba(100, 100, 100, 0.2);
+    transition: background .5s;
+}
+.switch.on{
+    background: #c69;
+}
+.switch.off{
+    background-color: white;
+}
+.switch div{
+    position: absolute;
+    width: 25px;
+    line-height: 25px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 3px 3px 3px rgba(100, 100, 100, 0.2);
+    transition: left .5s;
+}
+.switch.on div{
+    left: 0;
+}
+.switch.off div{
+    left: 30px;
+}
+.switch p{
+    line-height: 25px;
+    font-size: 10px;
+}
+.switch.on p{
+    float: right;
+    padding-right: 5px;
+}
+.switch.off p{
+    float: left;
+    padding-left: 5px;
+}
+.play_mode{
+    vertical-align: middle;
+    background: none;
+    color: white;
+    font-size: 15px;
+    margin-right: 10px;
+}
+.volume_control{
+    vertical-align: middle;
+    background: none;
+    color: white;
+    font-size: 15px;
+}
+#volume_range{
+    width: 5%;
+}
+.music_list_control{
+    background: none;
+    vertical-align: middle;
+    color: white;
+    font-size: 25px;
+    margin-left: 10px;
+    padding-top: 3px;
+}
