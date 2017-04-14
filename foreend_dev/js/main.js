@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 19:36:56
+* @Last Modified time: 2017-04-15 00:10:44
 */
 
 'use strict';
@@ -17,13 +17,46 @@ function numFixed(num, length){
     }
 };
 
-localStorage.user_music = '[{"src": "./test.mp3"},{"src": "./test1.mp3"},{"src": "./test2.mp3"}]';
+localStorage.user_music = '[ \
+                            {"src": "./test.mp3", \
+                             "title": "测试1", \
+                             "author": "Key", \
+                             "duration": "3:23"}, \
+                            {"src": "./test1.mp3", \
+                             "title": "测试2", \
+                             "author": "Key", \
+                             "duration": "5:30"}, \
+                            {"src": "./test2.mp3", \
+                             "title": "测试3", \
+                             "author": "Key", \
+                             "duration": "2:12"}\
+                           ]';
 localStorage.current_index = 0;
 
 $(document).ready(function(){
     var current_music_page = $('.current_music');
-
     var modes = ["loop", "infinite", "shuffle"];
+
+    //time_range
+    var time_range_tip = $('.time_bar_tip');
+    var time_range_tip_text = time_range_tip.children("p");
+    var ontimechange = function (e, seconds){
+        music.currentTime = seconds;
+        refreshTimeTip();
+    }
+    var show_time_tip = function(e, value, pos, pageX){
+        var time = value;
+        if(time < 0) time = 0;
+        var time_text = numFixed(Math.floor(time / 60), 2) + ":" + numFixed((time % 60), 2);
+        time_range_tip_text.html(time_text);
+        time_range_tip.css("left", (pageX - $(".control-panel").offset().left - time_range_tip.width() / 2) + "px");
+        time_range_tip.show();
+    }
+    var hide_time_tip = function(e){
+        time_range_tip.hide();
+    }
+    var time_range = new Rangebar("#time_range", 120, 0, ontimechange, show_time_tip, hide_time_tip);
+
     //music
     var music = $('audio')[0];
     var refreshTimeTip = function(){
@@ -60,28 +93,31 @@ $(document).ready(function(){
         $('#playorpause > span').attr("class", "icon-play");
     })
     //music_list
-    var onmusiclist_dataready = function(current_music, play_mode){
+    var onmusiclist_dataready = function(current_music, index, play_mode){
         if(current_music){
             music.src = current_music.src;
+            $('.music_ul > .music_item')[index].className += " current";
         }
         $('.play_mode > span').attr('class', 'icon-'+modes[play_mode]);
     }
-    var onmusic_change = function(current_music){
+    var onmusic_change = function(current_music, index){
         if(current_music){
             music.pause();
             clearInterval(track_timer);
             music.src = current_music.src;
+            $('.music_ul > .current').removeClass('current');
+            $('.music_ul > .music_item')[index].className += " current";
             time_range.pointto(0);
             try{
                 music.play();
             }
             catch(e){
-
+                //user switch the button too fast
             }
             track_timer = setInterval(pertime, 1000);
         }
     };
-    var music_list = new MusicList('#music_list', onmusiclist_dataready, onmusic_change);
+    var music_list = new MusicList('.music_list', onmusiclist_dataready, onmusic_change);
 
     //fly-send
     $('.fly > button').on('click', function(){
@@ -113,26 +149,6 @@ $(document).ready(function(){
     $('#next').on('click', function(){
         music_list.next();
     });
-
-    //time_range
-    var time_range_tip = $('.time_bar_tip');
-    var time_range_tip_text = time_range_tip.children("p");
-    var ontimechange = function (e, seconds){
-        music.currentTime = seconds;
-        refreshTimeTip();
-    }
-    var show_time_tip = function(e, value, pos, pageX){
-        var time = value;
-        if(time < 0) time = 0;
-        var time_text = numFixed(Math.floor(time / 60), 2) + ":" + numFixed((time % 60), 2);
-        time_range_tip_text.html(time_text);
-        time_range_tip.css("left", (pageX - $(".control-panel").offset().left - time_range_tip.width() / 2) + "px");
-        time_range_tip.show();
-    }
-    var hide_time_tip = function(e){
-        time_range_tip.hide();
-    }
-    var time_range = new Rangebar("#time_range", 120, 0, ontimechange, show_time_tip, hide_time_tip);
 
     //fly
     var fly_on = localStorage.fly_state;

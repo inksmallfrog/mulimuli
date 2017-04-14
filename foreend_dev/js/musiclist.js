@@ -2,18 +2,22 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 14:02:29
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-14 16:00:36
+* @Last Modified time: 2017-04-15 00:17:43
 */
 
 'use strict';
 
-var MusicList = function(id, onmusic_listready, onmusic_change){
-    this.el = this.buildListView(id);
+var MusicList = function(selector, onmusic_listready, onmusic_change){
+    this.el = $(selector);
     this.music_list = [];
     this.current_music_index = -1;
     Object.defineProperty(this, "music_index", {
         get: function(){return this.current_music_index;},
-        set: function(index){this.current_music_index = index; onmusic_change(this.music_list[index]);}
+        set: function(index){
+            this.current_music_index = index;
+            localStorage.current_index = index;
+            onmusic_change(this.music_list[index], index);
+        }
     });
     this.play_mode = 0;
     this.played_history = [];
@@ -22,14 +26,11 @@ var MusicList = function(id, onmusic_listready, onmusic_change){
     this.loadData(onmusic_listready);
 }
 
-MusicList.prototype.buildListView = function(id){
-    var jqEl = $(id);
-    jqEl.append("<ul></ul>", {
-        class: 'music_ul'
-    }).append("<div></div>",{
-        class: 'bottom_triangle'
-    });
-    return jqEl;
+MusicList.prototype.buildListView = function(){
+    var music_ul = this.el.children(".music_ul");
+    var renderRes = simpleERBTemplate('music_template', {music_list: this.music_list, current: this.current_music_index});
+    $('#music_template').parent()[0].innerHTML += renderRes;
+    $('#music_template').remove();
 }
 
 MusicList.prototype.loadData = function(onmusic_listready){
@@ -37,6 +38,7 @@ MusicList.prototype.loadData = function(onmusic_listready){
     this.current_music_index = parseInt(localStorage.current_index);
     this.play_mode = parseInt(localStorage.play_mode);
     if(this.play_mode === undefined) this.play_mode = 0;
+    if(this.current_music_index === undefined && this.music_list.length > 0) this.music_index = 0;
     if(!this.music_list){
         //try to load data from server with Ajax
         //
@@ -44,11 +46,14 @@ MusicList.prototype.loadData = function(onmusic_listready){
         this.music_list = [];
         this.current_music_index = -1;
         this.play_mode = 0;
-        onmusic_listready({src:""}, this.play_mode);
+        this.buildListView();
+        onmusic_listready({src:""}, -1, this.play_mode);
+        $('.music_list > .header > .title').html("播放列表(" + this.music_list.length + ")");
     }
     else{
-        //render view
-        onmusic_listready(this.music_list[this.current_music_index], this.play_mode);
+        this.buildListView();
+        onmusic_listready(this.music_list[this.current_music_index], this.current_music_index, this.play_mode);
+        $('.music_list > .header > .title').html("播放列表(" + this.music_list.length + ")");
     }
 }
 

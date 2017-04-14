@@ -74,33 +74,19 @@
                         <button class="close pointer"><span class="icon-cross"></span></button>
                     </div>
                     <ul class="music_ul">
-                        <li class="current music_item">
-                            <div class="mark_icon"><span class="icon-heart"></span></div>
-                            <p class="music_title">团子大家族</p>
-                            <p class="music_author">Key</p>
-                            <p class="music_duration">5:03</p>
-                            <button class="heart pointer"><span class="icon-heart"></span></button>
-                            <button class="mark pointer"><span class="icon-heart"></span></button>
-                            <button class="delete pointer"><span class="icon-heart"></span></button>
-                        </li>
-                        <li class="music_item">
-                            <div class="mark_icon"><span class="icon-heart"></span></div>
-                            <p class="music_title">团子大家族</p>
-                            <p class="music_author">Key</p>
-                            <p class="music_duration">5:03</p>
-                            <button class="heart pointer"><span class="icon-heart"></span></button>
-                            <button class="mark pointer"><span class="icon-heart"></span></button>
-                            <button class="delete pointer"><span class="icon-heart"></span></button>
-                        </li>
-                        <li class="music_item">
-                            <div class="mark_icon"><span class="icon-heart"></span></div>
-                            <p class="music_title">团子大家族</p>
-                            <p class="music_author">Key</p>
-                            <p class="music_duration">5:03</p>
-                            <button class="heart pointer"><span class="icon-heart"></span></button>
-                            <button class="mark pointer"><span class="icon-heart"></span></button>
-                            <button class="delete pointer"><span class="icon-heart"></span></button>
-                        </li>
+                        <script id="music_template" type="text/html">
+                            <%for(var i = 0; i < data.music_list.length; ++i){%>
+                                <li class="music_item" data-id="<%=i%>">
+                                    <div class="mark_icon"><span class="icon-heart"></span></div>
+                                    <p class="music_title"><%=data.music_list[i].title%></p>
+                                    <p class="music_author"><%=data.music_list[i].author%></p>
+                                    <p class="music_duration"><%=data.music_list[i].duration%></p>
+                                    <button class="heart pointer"><span class="icon-heart"></span></button>
+                                    <button class="mark pointer"><span class="icon-heart"></span></button>
+                                    <button class="delete pointer"><span class="icon-heart"></span></button>
+                                </li>
+                            <%}%>
+                        </script>
                     </ul>
                     <div class="bottom_triangle"></div>
                 </div>
@@ -111,7 +97,7 @@
             </div>
         </div>
         <!--End-->
-
+        <script src="js/template.js"></script>
         <script src="js/jquery-3.2.0.js"></script>
         <script src="js/rangebar.js"></script>
         <script src="js/musiclist.js"></script>
