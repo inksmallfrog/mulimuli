@@ -5,3 +5,4 @@ if [ $1 ] ; then
 else
     git commit -m `date "+%Y-%m-%d %H:%M:%S"`
 fi
+git push github master
