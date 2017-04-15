@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/fly.css">
         <link rel="stylesheet" href="css/control.css">
         <link rel="stylesheet" href="css/music_list.css">
+        <link rel="stylesheet" href="css/current_music_view.css">
     </head>
     <body>
         <!--网站内容区域-->
@@ -17,8 +18,17 @@
         <!--End-->
 
         <!--当前音乐区-->
-        <section class="current_music" aria-hidden="true">
-
+        <section class="current_music show">
+            <ul class="control_panel">
+                <li><button class="pointer"><span class="icon-close"></span></button></li>
+            </ul>
+            <div class="music_content">
+                <figure class="music_cover">
+                    <img src="./assets/test.jpg" alt="">
+                    <div class="center_circle"></div>
+                </figure>
+                <p class="music_lyrics"></p>
+            </div>
         </section>
         <!--End-->
 
@@ -28,7 +38,7 @@
 
         <!--弹幕发送-->
         <div class="fly">
-            <input type="text" placeholder="点我输入您的弹幕～" title="弹幕输入栏"><button>发送</button>
+            <input type="text" placeholder="点我输入您的弹幕～" title="弹幕输入栏"><button><span class="icon-send"></span></button>
         </div>
         <!--End-->
 
@@ -59,31 +69,42 @@
                     <p>ON</p>
                 </button>
                 <button class="play_mode pointer">
-                    <span class="icon-loop"></span>
+                    <span class="icon-repeat"></span>
                 </button>
                 <button class="volume_control pointer">
                     <span class="icon-volume-high"></span>
                 </button>
                 <div class="" id="volume_range"></div>
                 <!--音乐列表-->
-                <div class="music_list" aria-hidden = "false">
+                <div class="music_list">
                     <div class="header">
                         <p class="title">播放列表(n)</p>
                         <button class="mark_all pointer small_font">添加收藏</button>
                         <button class="clear_all pointer small_font">清空全部</button>
-                        <button class="close pointer"><span class="icon-cross"></span></button>
+                        <button class="close pointer"><span class="icon-close"></span></button>
                     </div>
                     <ul class="music_ul">
                         <script id="music_template" type="text/html">
                             <%for(var i = 0; i < data.music_list.length; ++i){%>
-                                <li class="music_item" data-id="<%=i%>">
-                                    <div class="mark_icon"><span class="icon-heart"></span></div>
+                                <li class="music_item" data-id="<%=data.music_list[i].id%>">
+                                    <div class="mark_icon"><span class="icon-playing"></span></div>
                                     <p class="music_title"><%=data.music_list[i].title%></p>
                                     <p class="music_author"><%=data.music_list[i].author%></p>
                                     <p class="music_duration"><%=data.music_list[i].duration%></p>
-                                    <button class="heart pointer"><span class="icon-heart"></span></button>
-                                    <button class="mark pointer"><span class="icon-heart"></span></button>
-                                    <button class="delete pointer"><span class="icon-heart"></span></button>
+                                    <%if(data.user){%>
+                                        <%if(data.user.isfavorite(data.music_list[i].id))%>
+                                            <button class="heart pointer"><span class="icon-favorite"></span></button>
+                                        <%else %>
+                                            <button class="heart pointer"><span class="icon-unfavorite"></span></button>
+                                        <%if(data.user.ismarked(data.music_list[i].id))%>
+                                            <button class="mark pointer"><span class="icon-unmarked"></span></button>
+                                        <%else %>
+                                            <button class="mark pointer"><span class="icon-marked"></span></button>
+                                    <%}else{%>
+                                    <button class="heart pointer"><span class="icon-unfavorite"></span></button>
+                                    <button class="mark pointer"><span class="icon-unmarked"></span></button>
+                                    <%}%>
+                                    <button class="delete pointer"><span class="icon-delete"></span></button>
                                 </li>
                             <%}%>
                         </script>

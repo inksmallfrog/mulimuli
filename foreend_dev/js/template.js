@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 22:38:29
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-15 00:04:24
+* @Last Modified time: 2017-04-15 08:51:44
 */
 
 'use strict';
@@ -13,7 +13,7 @@ var simpleERBTemplate = function(id, data){
     var pattern = /<%=(.*?)%>|<%(.*?)%>/g;
     var funcBody = "var temp='';temp += '";
     var index = 0;
-    var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
+    var escaper = /\\|'|\r|\n|\t|\u2028|\u2029|\s+/g;
     var escapes = {
         "'":      "'",
         '\\':     '\\',
@@ -21,11 +21,12 @@ var simpleERBTemplate = function(id, data){
         '\n':     'n',
         '\t':     't',
         '\u2028': 'u2028',
-        '\u2029': 'u2029'
+        '\u2029': 'u2029',
     };
 
     template.replace(pattern, function(res, interpolate, evaluate, code_index){
         funcBody += template.slice(index, code_index).replace(escaper, function(match){
+            if(/\s+/.test(match)) return " ";
             return "\\" + escapes[match];
         }) //get normal HTML
         if(interpolate){

@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-15 00:10:44
+* @Last Modified time: 2017-04-15 11:13:49
 */
 
 'use strict';
@@ -18,28 +18,35 @@ function numFixed(num, length){
 };
 
 localStorage.user_music = '[ \
-                            {"src": "./test.mp3", \
+                            {"id": 0, \
+                             "src": "./test.mp3", \
                              "title": "测试1", \
                              "author": "Key", \
                              "duration": "3:23"}, \
-                            {"src": "./test1.mp3", \
+                            {"id": 1, \
+                             "src": "./test1.mp3", \
                              "title": "测试2", \
                              "author": "Key", \
                              "duration": "5:30"}, \
-                            {"src": "./test2.mp3", \
+                            {"id": 2, \
+                             "src": "./test2.mp3", \
                              "title": "测试3", \
                              "author": "Key", \
                              "duration": "2:12"}\
                            ]';
-localStorage.current_index = 0;
+localStorage.music_index = 0;
 
 $(document).ready(function(){
-    var current_music_page = $('.current_music');
-    var modes = ["loop", "infinite", "shuffle"];
+    var $current_music_page = $('.current_music');
+    var reset_current_music = function(id){
+        //get music info by Ajax
+    }
+
+    var modes = ["repeat", "repeat_one", "shuffle"];
 
     //time_range
-    var time_range_tip = $('.time_bar_tip');
-    var time_range_tip_text = time_range_tip.children("p");
+    var $time_range_tip = $('.time_bar_tip');
+    var $time_range_tip_text = $time_range_tip.children("p");
     var ontimechange = function (e, seconds){
         music.currentTime = seconds;
         refreshTimeTip();
@@ -48,12 +55,12 @@ $(document).ready(function(){
         var time = value;
         if(time < 0) time = 0;
         var time_text = numFixed(Math.floor(time / 60), 2) + ":" + numFixed((time % 60), 2);
-        time_range_tip_text.html(time_text);
-        time_range_tip.css("left", (pageX - $(".control-panel").offset().left - time_range_tip.width() / 2) + "px");
-        time_range_tip.show();
+        $time_range_tip_text.html(time_text);
+        $time_range_tip.css("left", (pageX - $(".control-panel").offset().left - $time_range_tip.width() / 2) + "px");
+        $time_range_tip.show();
     }
     var hide_time_tip = function(e){
-        time_range_tip.hide();
+        $time_range_tip.hide();
     }
     var time_range = new Rangebar("#time_range", 120, 0, ontimechange, show_time_tip, hide_time_tip);
 
@@ -70,12 +77,7 @@ $(document).ready(function(){
     var track_timer = null;
     $(music).bind('progress', function(){
         if(this.buffered.length < 1) return;
-        console.log(this.buffered.end(0) + ":" + this.duration);
         $('.loaded_line').css('width', (this.buffered.end(0) / this.duration) * 100 + "%");
-    }).bind('stalled', function(){
-        $('#playorpause').attr("disabled",true);
-        $('#previous').attr("disabled",true);
-        $('#next').attr("disabled",true);
     }).bind('loadedmetadata', function(){
         time_range.maxValue = this.duration;
         $('#a_time').html("/ " + numFixed(Math.floor(this.duration / 60), 2) + ":" + numFixed(Math.floor(this.duration) % 60, 2));
@@ -93,12 +95,18 @@ $(document).ready(function(){
         $('#playorpause > span').attr("class", "icon-play");
     })
     //music_list
-    var onmusiclist_dataready = function(current_music, index, play_mode){
+    var on_musiclist_datachange = function(current_music, index, play_mode){
         if(current_music){
             music.src = current_music.src;
             $('.music_ul > .music_item')[index].className += " current";
         }
-        $('.play_mode > span').attr('class', 'icon-'+modes[play_mode]);
+        else {
+            music.src = "";
+            $('#playorpause').attr("disabled",true);
+            $('#previous').attr("disabled",true);
+            $('#next').attr("disabled",true);
+        }
+        if(play_mode) $('.play_mode > span').attr('class', 'icon-'+modes[play_mode]);
     }
     var onmusic_change = function(current_music, index){
         if(current_music){
@@ -107,6 +115,7 @@ $(document).ready(function(){
             music.src = current_music.src;
             $('.music_ul > .current').removeClass('current');
             $('.music_ul > .music_item')[index].className += " current";
+            reset_current_music(current_music.id);
             time_range.pointto(0);
             try{
                 music.play();
@@ -117,7 +126,7 @@ $(document).ready(function(){
             track_timer = setInterval(pertime, 1000);
         }
     };
-    var music_list = new MusicList('.music_list', onmusiclist_dataready, onmusic_change);
+    var music_list = new MusicList('.music_list', on_musiclist_datachange, onmusic_change);
 
     //fly-send
     $('.fly > button').on('click', function(){
@@ -137,9 +146,9 @@ $(document).ready(function(){
     //control-panel icon
     $('#music_favicon').on('click', function(){
         if(!music.currentSrc) return;
-        if(!current_music_page.hasClass("show")) {
-            current_music_page.addClass("show");
-            current_music_page.attr("aria-hidden", "false");
+        if(!$current_music_page.hasClass("show")) {
+            $current_music_page.addClass("show");
+            $current_music_page.removeAttr("aria-hidden");
         }
     });
     $('#previous').on('click', function(){
@@ -185,6 +194,12 @@ $(document).ready(function(){
     var volume_control_icon = $('.volume_control > span');
     var volume_before_blocked = -1;
     var user_volume = localStorage.volume ? localStorage.volume : 100;
+    if(localStorage.volume_state == "blocked") {
+        volume_before_blocked = localStorage.volume ? localStorage.volume : 100;
+        music.volume = 0;
+        volume_control_icon.attr("class", "icon-volume-blocked");
+    }
+
     var refresh_volume_control_icon = function(value){
         if(value == 0) volume_control_icon.attr("class", "icon-volume-mute");
         else if(value <= 33) volume_control_icon.attr("class", "icon-volume-low");
@@ -197,20 +212,22 @@ $(document).ready(function(){
             refresh_volume_control_icon(value);
         }
         else{
-            volume_before_blocked = value / 100;
+            volume_before_blocked = value;
         }
         localStorage.volume = value;
     }
     var volume_range = new Rangebar("#volume_range", 100, user_volume, onvolumechange)
     $('.volume_control').bind('click', function(){
         if(volume_before_blocked == -1) {
-            volume_before_blocked = music.volume;
+            volume_before_blocked = music.volume * 100;
             music.volume = 0;
             volume_control_icon.attr("class", "icon-volume-blocked");
+            localStorage.volume_state = "blocked";
         }
         else{
-            music.volume = volume_before_blocked;
-            refresh_volume_control_icon(volume_before_blocked * 100);
+            localStorage.volume_state = "";
+            music.volume = volume_before_blocked / 100;
+            refresh_volume_control_icon(volume_before_blocked);
             volume_before_blocked = -1;
         }
     })
@@ -219,7 +236,7 @@ $(document).ready(function(){
         music_list_view.animate({
             height: 0,
             width: 0
-        }, 500, function(){
+        }, 200, function(){
             music_list_view.hide();
             this.setAttribute("aria-hidden", "true");
         });
@@ -229,8 +246,8 @@ $(document).ready(function(){
         music_list_view.animate({
             height: "400px",
             width: "800px"
-        }, 500, function(){
-            this.setAttribute("aria-hidden", "false");
+        }, 200, function(){
+            this.removeAttribute("aria-hidden");
         });
     }
     $('.music_list .close').bind('click', function(){
