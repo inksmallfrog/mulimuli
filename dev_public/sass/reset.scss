@@ -1,8 +1,8 @@
 /*
 * @Author: inksmallfrog
-* @Date:   2017-04-06 08:17:04
+* @Date:   2017-04-18 23:00:27
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-10 08:53:07
+* @Last Modified time: 2017-04-18 23:05:03
 */
 *{
     margin: 0;
@@ -17,18 +17,9 @@ a{
     text-decoration: none;
 }
 
-button{
+button, input{
     border: 0;
-}
-
-input{
-    border: 0;
-}
-
-input:focus {
-    outline: none;
-}
-
-button:focus{
-    outline: none;
+    &:focus{
+        outline: none;
+    }
 }

@@ -1,0 +1,25 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-18 23:14:23
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-18 23:17:51
+*/
+.fly_send{
+    position: absolute;
+    left: 0;
+    line-height: $fly_send_height;
+    height: $fly_send_height;
+    bottom: $music_control_height;
+    width: 100%;
+    input{
+        height: $fly_send_height;
+        box-sizing: border-box;
+        width: 95%;
+        padding: 0 10px;
+    };
+    button{
+        height: $fly_send_height;
+        width: 5%;
+        vertical-align: bottom;
+    }
+}

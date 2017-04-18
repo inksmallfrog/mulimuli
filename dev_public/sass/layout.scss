@@ -1,0 +1,27 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-18 23:05:33
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-19 00:01:07
+*/
+
+$min_PC_width: 980px;
+$PC_response_width: 94%;
+
+$fly_send_height : 25px;
+$music_control_height : 50px;
+
+body{
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+#page{
+    width: 100%;
+    height: 100%;
+    margin-bottom: $fly_send_height + $music_control_height;
+}
+
+@import '_current_music';
+@import '_fly_send';
+@import '_music_control';

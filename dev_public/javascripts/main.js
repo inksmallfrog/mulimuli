@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-15 11:13:49
+* @Last Modified time: 2017-04-19 00:08:33
 */
 
 'use strict';
@@ -129,11 +129,11 @@ $(document).ready(function(){
     var music_list = new MusicList('.music_list', on_musiclist_datachange, onmusic_change);
 
     //fly-send
-    $('.fly > button').on('click', function(){
+    $('.fly_send > button').on('click', function(){
         if(/*!user.logged*/true){
             //showLogginModal()
         }
-        var fly_content = $('.fly > input').value.trim();
+        var fly_content = $('.fly_send > input').value.trim();
         if(!fly_content){
             //showErr(flyError, "请输入字幕内容哟")
         }
@@ -167,7 +167,7 @@ $(document).ready(function(){
         if(fly_on){
             switcher.removeClass('on').addClass('off');
             switcher.children('p').html('OFF');
-            $('.fly').slideToggle("fast");
+            $('.fly_send').slideToggle("fast");
             fly_on = false;
             localStorage.fly_state = false;
             //clear all flys
@@ -175,7 +175,7 @@ $(document).ready(function(){
         else{
             switcher.removeClass('off').addClass('on');
             switcher.children('p').html('ON');
-            $('.fly').slideToggle("fast");
+            $('.fly_send').slideToggle("fast");
             fly_on = true;
             localStorage.fly_state = true;
         }

@@ -5,10 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var env = process.env.NODE_ENV || 'development';
+env = env.toLowerCase();
+if(env != 'development' && env != 'production') {
+    throw new Error('Unknown enviroment: ' + env);
+}
+
+var config = require('./config/' + env);
+var db = require('./db');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
+var music = require('./routes/music');
 
 var app = express();
+
+app.set('env', env);
+console.log('You are running this app at ' + env + ' enviroment now!');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,10 +34,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+if(env == 'development') app.use(express.static(path.join(__dirname, 'dev_public')));
+else if(env == 'production') app.use(express.static(path.join(__dirname, 'public')));
+else throw new Error('Unknown enviroment: ' + env);
+
+app.use(db.init(config));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/music', music);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,6 +61,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(config.port, function () {
+  console.log('app listening on port 3000!');
 });
 
 module.exports = app;

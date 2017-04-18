@@ -1,0 +1,100 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-18 23:31:33
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-19 00:07:34
+*/
+.music_list{
+    position: absolute;
+    display: none;
+    bottom: 50px;
+    right: 8px;
+    width: 0;
+    height: 0;
+    background: green;
+    z-index: 10;
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        border-bottom: 1px black solid;
+        padding: 0 20px;
+        line-height: 30px;
+        margin-bottom: 10px;
+        p{
+            flex-grow: 20;
+        }
+    }
+
+    button{
+        font-size: 20px;
+        background: none;
+        vertical-align: middle;
+        flex-grow: 0;
+        span{
+            line-height: 30px;
+        }
+    }
+
+    .small_font{
+        font-size: 10px;
+        flex-grow: 1;
+        margin-right: 20px;
+    }
+
+    .bottom_triangle{
+        position: absolute;
+        right: 33px;
+        bottom: -20px;
+        border-left: transparent solid 10px;
+        border-right: transparent solid 10px;
+        border-top: green 10px solid;
+        border-bottom: transparent 10px solid;
+    }
+
+    .music_item{
+        height: 18px;
+        line-height: 18px;
+        display: flex;
+        padding: 3px 20px;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        &:hover{
+            cursor: pointer;
+            background: white;
+        }
+        .mark_icon{
+            flex-grow: 1;
+            visibility: hidden;
+            margin-right: -18px;
+        }
+        .music_title{
+            flex-grow: 8;
+        }
+        .music_author{
+            flex-grow: 3;
+        }
+        .music_duration{
+            flex-grow: 2;
+        }
+        button{
+            flex-grow: 0;
+            margin: 0 10px;
+            text-align: right;
+            &:last-child{
+                margin-right: 0;
+            }
+            &:hover{
+                color: #666;
+            }
+        }
+    }
+    .music_item.current{
+        .mark_icon{
+            visibility:visible;
+        }
+    }
+}

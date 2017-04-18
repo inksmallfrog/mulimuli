@@ -3,14 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/fonts.css">
-        <link rel="stylesheet" href="css/reset.css">
-        <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/layout.css">
-        <link rel="stylesheet" href="css/fly.css">
-        <link rel="stylesheet" href="css/control.css">
-        <link rel="stylesheet" href="css/music_list.css">
-        <link rel="stylesheet" href="css/current_music_view.css">
+        <link rel="stylesheet" href="/stylesheets/fonts.css">
+        <link rel="stylesheet" href="/stylesheets/reset.css">
+        <link rel="stylesheet" href="/stylesheets/common.css">
+        <link rel="stylesheet" href="/stylesheets/layout.css">
     </head>
     <body>
         <!--网站内容区域-->
@@ -37,7 +33,7 @@
         <!--End-->
 
         <!--弹幕发送-->
-        <div class="fly">
+        <div class="fly_send">
             <input type="text" placeholder="点我输入您的弹幕～" title="弹幕输入栏"><button><span class="icon-send"></span></button>
         </div>
         <!--End-->
@@ -76,7 +72,7 @@
                 </button>
                 <div class="" id="volume_range"></div>
                 <!--音乐列表-->
-                <div class="music_list">
+                <div class="music_list" aria-hidden="true">
                     <div class="header">
                         <p class="title">播放列表(n)</p>
                         <button class="mark_all pointer small_font">添加收藏</button>
@@ -118,11 +114,11 @@
             </div>
         </div>
         <!--End-->
-        <script src="js/template.js"></script>
-        <script src="js/jquery-3.2.0.js"></script>
-        <script src="js/rangebar.js"></script>
-        <script src="js/musiclist.js"></script>
-        <script src="js/main.js"></script>
+        <script src="javascripts/template.js"></script>
+        <script src="javascripts/jquery-3.2.0.js"></script>
+        <script src="javascripts/rangebar.js"></script>
+        <script src="javascripts/musiclist.js"></script>
+        <script src="javascripts/main.js"></script>
     </body>
 </html>
 

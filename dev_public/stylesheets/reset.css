@@ -1,0 +1,20 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-18 23:00:27
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-18 23:05:03
+*/
+* {
+  margin: 0;
+  padding: 0; }
+
+li {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+button, input {
+  border: 0; }
+  button:focus, input:focus {
+    outline: none; }

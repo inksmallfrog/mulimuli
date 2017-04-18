@@ -1,0 +1,54 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-18 23:43:39
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-18 23:46:15
+*/
+$music_backcolor: #9cc;
+.current_music{
+    position: absolute;
+    top: 100vh;
+    background: $music_backcolor;
+    width: 100%;
+    height: 100vh;
+    transition: top .5s;
+    .control_panel{
+        position: absolute;
+        right: 5%;
+        top: 50px;
+        button{
+            width: 50px;
+            height: 50px;
+            background: rgba(200, 200, 200, 0.6);
+            font-size: 20px;
+        }
+    }
+    .music_content{
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+        padding: 50px;
+        .music_cover{
+            width: 500px;
+            height: 500px;
+            position: relative;
+            img{
+                border-radius: 100%;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+            .center_circle{
+                position: absolute;
+                border-radius: 100%;
+                width: 140px;
+                height: 140px;
+                background-color: $music_backcolor;
+                left: 50%;
+                margin-left: -70px;
+                top: 50%;
+                margin-top: -70px;
+            }
+        }
+    }
+}
