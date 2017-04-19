@@ -2,17 +2,19 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:31:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 00:07:34
+* @Last Modified time: 2017-04-19 17:07:14
 */
-.music_list{
+$item_line_height: 18px;
+.musiclist{
     position: absolute;
     display: none;
     bottom: 50px;
-    right: 8px;
+    right: -30px;
     width: 0;
     height: 0;
     background: green;
     z-index: 10;
+    overflow: hidden;
 
     .header{
         display: flex;
@@ -55,40 +57,41 @@
     }
 
     .music_item{
-        height: 18px;
-        line-height: 18px;
-        display: flex;
+        position: relative;
+        line-height: $item_line_height;
         padding: 3px 20px;
-        justify-content: space-between;
-        align-items: center;
         text-align: left;
         &:hover{
             cursor: pointer;
             background: white;
         }
+        .mark_icon, .music_title, .music_artist, .music_duration{
+            display: inline-block;
+        }
         .mark_icon{
-            flex-grow: 1;
             visibility: hidden;
-            margin-right: -18px;
         }
         .music_title{
-            flex-grow: 8;
+            width: 40%;
         }
-        .music_author{
-            flex-grow: 3;
+        .music_artist{
+            width: 30%;
         }
         .music_duration{
-            flex-grow: 2;
+            width: 10%;
         }
         button{
-            flex-grow: 0;
             margin: 0 10px;
             text-align: right;
+            color: silver;
             &:last-child{
                 margin-right: 0;
             }
             &:hover{
                 color: #666;
+            }
+            span{
+                line-height: $item_line_height;
             }
         }
     }

@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:43:39
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-18 23:46:15
+* @Last Modified time: 2017-04-19 14:47:14
 */
 $music_backcolor: #9cc;
 .current_music{
@@ -51,4 +51,7 @@ $music_backcolor: #9cc;
             }
         }
     }
+}
+.current_music.show{
+    top: 0;
 }

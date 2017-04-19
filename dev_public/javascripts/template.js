@@ -2,11 +2,14 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 22:38:29
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-15 08:51:44
+* @Last Modified time: 2017-04-19 15:44:47
 */
 
 'use strict';
-var simpleERBTemplate = function(id, data){
+var simpleERBTemplate = function(id){
+    if(id.charAt(0) == '#'){
+        id = id.substring(1, id.length);
+    }
     var template_container = document.getElementById(id);
     var template = /^(textarea|input)$/i.test(template_container.nodeName) ? template_container.value : template_container.innerHTML;
 
@@ -40,7 +43,6 @@ var simpleERBTemplate = function(id, data){
     });
     funcBody += "';return temp;";
     console.log(funcBody);
-    var templateFun = new Function("data", funcBody);
-    return templateFun(data);
+    return new Function("data", funcBody);
 }
 

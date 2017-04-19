@@ -1,0 +1,52 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-19 08:48:39
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-19 15:16:02
+*/
+.range.horizental{
+    position: relative;
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+    background: none;
+    .track{
+        position: absolute;
+        height: 10px;
+        top: 50%;
+        margin-top: -5px;
+        width: 100%;
+    }
+    .visible_line{
+        position: absolute;
+        height: 4px;
+        top: 50%;
+        left: 0;
+        border-radius: 10px;
+        margin-top: -2px;
+    }
+    .loaded_line{
+        @extend .visible_line;
+        width: 0;
+        background-color: #3c7;
+        z-index: 10;
+    }
+    .track_line{
+        @extend .visible_line;
+        width: 100%;
+        background-color: #999;
+        z-index: 0;
+    }
+    .point{
+        box-sizing: border-box;
+        position: absolute;
+        height: 12px;
+        width: 12px;
+        top: 50%;
+        margin-top: -6px;
+        left: -5px;
+        border-radius: 100%;
+        border: white solid 4px;
+        background: #3c7;
+    }
+}

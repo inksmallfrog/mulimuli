@@ -29,7 +29,7 @@
         <!--End-->
 
         <!--隐藏的音频内容-->
-        <audio src="test.mp3"></audio>
+        <audio id="music" src=""></audio>
         <!--End-->
 
         <!--弹幕发送-->
@@ -40,84 +40,99 @@
 
         <!--控制板-->
         <div class="control">
-            <div class="control-panel">
-                <a href="javascript:void(0)" id="music_favicon">
-                    <img src="assets/test.jpg" alt="music_favicon">
-                </a>
-                <button class="control_item pointer" id="previous">
-                    <span class="icon-previous"></span>
-                </button>
-                <button class="control_item pointer" id="playorpause">
-                    <span class="icon-play"></span>
-                </button>
-                <button class="control_item pointer" id="next">
-                    <span class="icon-next"></span>
-                </button>
-                <div class="time_bar_tip">
-                    <p></p>
-                    <div class="bottom_triangle"></div>
+            <div class="control_panel">
+                <div class="panel_group">
+                    <a href="javascript:void(0)" id="music_favicon">
+                        <img src="assets/test.jpg" alt="music_favicon">
+                    </a>
                 </div>
-                <div class="" id="time_range"></div>
-                <span class="time_tip" id="c_time">00:00</span>
-                <span class="time_tip" id="a_time">/ 00:00</span>
-                <button class="switch on pointer" id="fly_control">
-                    <div id="fly_tip">弹</div>
-                    <p>ON</p>
-                </button>
-                <button class="play_mode pointer">
-                    <span class="icon-repeat"></span>
-                </button>
-                <button class="volume_control pointer">
-                    <span class="icon-volume-high"></span>
-                </button>
-                <div class="" id="volume_range"></div>
-                <!--音乐列表-->
-                <div class="music_list" aria-hidden="true">
-                    <div class="header">
-                        <p class="title">播放列表(n)</p>
-                        <button class="mark_all pointer small_font">添加收藏</button>
-                        <button class="clear_all pointer small_font">清空全部</button>
-                        <button class="close pointer"><span class="icon-close"></span></button>
+                <div class="panel_group grow_1">
+                    <button class="control_item small pointer" id="previous">
+                        <span class="icon-previous"></span>
+                    </button>
+                    <button class="control_item big pointer" id="playorpause">
+                        <span class="icon-play"></span>
+                    </button>
+                    <button class="control_item small pointer" id="next">
+                        <span class="icon-next"></span>
+                    </button>
+                </div>
+                <div class="panel_group grow_20">
+                    <div class="time_bar_tip">
+                        <p></p>
+                        <div class="bottom_triangle"></div>
                     </div>
-                    <ul class="music_ul">
-                        <script id="music_template" type="text/html">
-                            <%for(var i = 0; i < data.music_list.length; ++i){%>
-                                <li class="music_item" data-id="<%=data.music_list[i].id%>">
-                                    <div class="mark_icon"><span class="icon-playing"></span></div>
-                                    <p class="music_title"><%=data.music_list[i].title%></p>
-                                    <p class="music_author"><%=data.music_list[i].author%></p>
-                                    <p class="music_duration"><%=data.music_list[i].duration%></p>
-                                    <%if(data.user){%>
-                                        <%if(data.user.isfavorite(data.music_list[i].id))%>
-                                            <button class="heart pointer"><span class="icon-favorite"></span></button>
-                                        <%else %>
-                                            <button class="heart pointer"><span class="icon-unfavorite"></span></button>
-                                        <%if(data.user.ismarked(data.music_list[i].id))%>
-                                            <button class="mark pointer"><span class="icon-unmarked"></span></button>
-                                        <%else %>
-                                            <button class="mark pointer"><span class="icon-marked"></span></button>
-                                    <%}else{%>
-                                    <button class="heart pointer"><span class="icon-unfavorite"></span></button>
-                                    <button class="mark pointer"><span class="icon-unmarked"></span></button>
-                                    <%}%>
-                                    <button class="delete pointer"><span class="icon-delete"></span></button>
-                                </li>
-                            <%}%>
-                        </script>
-                    </ul>
-                    <div class="bottom_triangle"></div>
+                    <div class="" id="time_range"></div>
                 </div>
-                <!--End-->
-                <button class="music_list_control pointer">
-                    <span class="icon-list"></span>
-                </button>
+                <div class="panel_group">
+                    <span class="time_tip" id="c_time">00:00</span>
+                    <span class="time_tip" id="a_time">/ 00:00</span>
+                </div>
+                <div class="panel_group grow_1">
+                    <button class="switch on pointer" id="fly_control">
+                        <div id="fly_tip">弹</div>
+                        <p>ON</p>
+                    </button>
+                </div>
+                <div class="panel_group grow_2">
+                    <button class="play_mode pointer" id="play_mode">
+                        <span class="icon-repeat"></span>
+                    </button>
+                    <button class="volume_control pointer">
+                        <span class="icon-volume-high"></span>
+                    </button>
+                    <div class="" id="volume_range"></div>
+                </div>
+                <div class="panel_group">
+                    <!--音乐列表-->
+                    <div class="musiclist" aria-hidden="true">
+                        <div class="header">
+                            <p class="title">播放列表(n)</p>
+                            <button class="mark_all pointer small_font">添加收藏</button>
+                            <button class="clear_all pointer small_font">清空全部</button>
+                            <button class="close pointer"><span class="icon-close"></span></button>
+                        </div>
+                        <ul class="music_ul">
+                            <script id="music_template" type="text/html">
+                                <%for(var i = 0; i < data.musiclist.length; ++i){%>
+                                    <li class="music_item" data-id="<%=data.musiclist[i].id%>">
+                                        <div class="mark_icon"><span class="icon-playing"></span></div>
+                                        <p class="music_title"><%=data.musiclist[i].title%></p>
+                                        <p class="music_artist"><%=data.musiclist[i].author%></p>
+                                        <p class="music_duration"><%=data.musiclist[i].duration%></p>
+                                        <%if(data.user){%>
+                                            <%if(data.user.isfavorite(data.musiclist[i].id))%>
+                                                <button class="heart pointer"><span class="icon-favorite"></span></button>
+                                            <%else %>
+                                                <button class="heart pointer"><span class="icon-unfavorite"></span></button>
+                                            <%if(data.user.ismarked(data.musiclist[i].id))%>
+                                                <button class="mark pointer"><span class="icon-unmarked"></span></button>
+                                            <%else %>
+                                                <button class="mark pointer"><span class="icon-marked"></span></button>
+                                        <%}else{%>
+                                        <button class="heart pointer"><span class="icon-unfavorite"></span></button>
+                                        <button class="mark pointer"><span class="icon-unmarked"></span></button>
+                                        <%}%>
+                                        <button class="delete pointer"><span class="icon-delete"></span></button>
+                                    </li>
+                                <%}%>
+                            </script>
+                        </ul>
+                        <div class="bottom_triangle"></div>
+                    </div>
+                    <!--End-->
+                    <button class="musiclist_control pointer">
+                        <span class="icon-list"></span>
+                    </button>
+                </div>
             </div>
         </div>
         <!--End-->
         <script src="javascripts/template.js"></script>
         <script src="javascripts/jquery-3.2.0.js"></script>
+        <script src="javascripts/util.js"></script>
         <script src="javascripts/rangebar.js"></script>
-        <script src="javascripts/musiclist.js"></script>
+        <script src="javascripts/music_player.js"></script>
         <script src="javascripts/main.js"></script>
     </body>
 </html>
