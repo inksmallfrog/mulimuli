@@ -25,11 +25,12 @@
                 </figure>
                 <p class="music_lyrics"></p>
             </div>
+            <canvas id="flies_canvas"></canvas>
         </section>
         <!--End-->
 
         <!--隐藏的音频内容-->
-        <audio id="music" src=""></audio>
+        <audio id="music" src="" preload="auto"></audio>
         <!--End-->
 
         <!--弹幕发送-->
@@ -46,7 +47,7 @@
                         <img src="assets/test.jpg" alt="music_favicon">
                     </a>
                 </div>
-                <div class="panel_group grow_1">
+                <div class="panel_group grow_control">
                     <button class="control_item small pointer" id="previous">
                         <span class="icon-previous"></span>
                     </button>
@@ -57,7 +58,7 @@
                         <span class="icon-next"></span>
                     </button>
                 </div>
-                <div class="panel_group grow_20">
+                <div class="panel_group grow_timerange">
                     <div class="time_bar_tip">
                         <p></p>
                         <div class="bottom_triangle"></div>
@@ -68,13 +69,13 @@
                     <span class="time_tip" id="c_time">00:00</span>
                     <span class="time_tip" id="a_time">/ 00:00</span>
                 </div>
-                <div class="panel_group grow_1">
+                <div class="panel_group grow_control">
                     <button class="switch on pointer" id="fly_control">
                         <div id="fly_tip">弹</div>
                         <p>ON</p>
                     </button>
                 </div>
-                <div class="panel_group grow_2">
+                <div class="panel_group grow_volume">
                     <button class="play_mode pointer" id="play_mode">
                         <span class="icon-repeat"></span>
                     </button>
@@ -98,8 +99,8 @@
                                     <li class="music_item" data-id="<%=data.musiclist[i].id%>">
                                         <div class="mark_icon"><span class="icon-playing"></span></div>
                                         <p class="music_title"><%=data.musiclist[i].title%></p>
-                                        <p class="music_artist"><%=data.musiclist[i].author%></p>
-                                        <p class="music_duration"><%=data.musiclist[i].duration%></p>
+                                        <p class="music_artist"><%=data.musiclist[i].artist%></p>
+                                        <p class="music_duration"><%=seconds2m_s(data.musiclist[i].duration)%></p>
                                         <%if(data.user){%>
                                             <%if(data.user.isfavorite(data.musiclist[i].id))%>
                                                 <button class="heart pointer"><span class="icon-favorite"></span></button>
@@ -130,6 +131,8 @@
         <!--End-->
         <script src="javascripts/template.js"></script>
         <script src="javascripts/jquery-3.2.0.js"></script>
+        <script src="javascripts/jquery.cookie.js"></script>
+        <script src="javascripts/jquery.pause.min.js"></script>
         <script src="javascripts/util.js"></script>
         <script src="javascripts/rangebar.js"></script>
         <script src="javascripts/music_player.js"></script>

@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-17 18:50:10
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-18 10:10:32
+* @Last Modified time: 2017-04-20 07:56:52
 */
 'use strict';
 function appuserModel(sequelize, DataType){
@@ -36,7 +36,7 @@ function appuserModel(sequelize, DataType){
         },
         info: {
             type: DataType.STRING,
-        }
+        },
     });
     return Appuser;
 }

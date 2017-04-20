@@ -2,22 +2,22 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 22:38:29
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 15:44:47
+* @Last Modified time: 2017-04-20 09:13:40
 */
 
 'use strict';
-var simpleERBTemplate = function(id){
+let simpleERBTemplate = function(id){
     if(id.charAt(0) == '#'){
         id = id.substring(1, id.length);
     }
-    var template_container = document.getElementById(id);
-    var template = /^(textarea|input)$/i.test(template_container.nodeName) ? template_container.value : template_container.innerHTML;
+    let template_container = document.getElementById(id);
+    let template = /^(textarea|input)$/i.test(template_container.nodeName) ? template_container.value : template_container.innerHTML;
 
-    var pattern = /<%=(.*?)%>|<%(.*?)%>/g;
-    var funcBody = "var temp='';temp += '";
-    var index = 0;
-    var escaper = /\\|'|\r|\n|\t|\u2028|\u2029|\s+/g;
-    var escapes = {
+    let pattern = /<%=(.*?)%>|<%(.*?)%>/g;
+    let funcBody = "var temp='';temp += '";
+    let index = 0;
+    let escaper = /\\|'|\r|\n|\t|\u2028|\u2029|\s+/g;
+    let escapes = {
         "'":      "'",
         '\\':     '\\',
         '\r':     'r',
@@ -27,8 +27,8 @@ var simpleERBTemplate = function(id){
         '\u2029': 'u2029',
     };
 
-    template.replace(pattern, function(res, interpolate, evaluate, code_index){
-        funcBody += template.slice(index, code_index).replace(escaper, function(match){
+    template.replace(pattern, (res, interpolate, evaluate, code_index) => {
+        funcBody += template.slice(index, code_index).replace(escaper, (match) => {
             if(/\s+/.test(match)) return " ";
             return "\\" + escapes[match];
         }) //get normal HTML

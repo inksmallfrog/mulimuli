@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:18:31
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 15:34:31
+* @Last Modified time: 2017-04-20 15:03:16
 */
 $music_favicon_size: 35px;
 $big_icon_size: 35px;
@@ -70,7 +70,7 @@ $small_icon_size: 25px;
             @import '_music_list';
             @import '_range';
         }
-        .grow_1{
+        .grow_control{
             flex-grow: 1;
             .control_item{
                 position: relative;
@@ -140,8 +140,8 @@ $small_icon_size: 25px;
                 }
             }
         }
-        .grow_2{
-            flex-grow: 2;
+        .grow_volume{
+            flex-grow: 3;
             text-align: left;
             .volume_control{
                 vertical-align: middle;
@@ -154,7 +154,7 @@ $small_icon_size: 25px;
                 width: 45%;
             }
         }
-        .grow_20{
+        .grow_timerange{
             flex-grow: 20;
             .time_bar_tip{
                 position: absolute;

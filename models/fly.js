@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-17 19:29:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-18 13:36:42
+* @Last Modified time: 2017-04-20 08:32:54
 */
 
 'use strict';
@@ -19,7 +19,7 @@ function flyModel(sequelize, DataType){
         music_id:{
             type: DataType.INTEGER,
         },
-        user_id:{
+        owner_id:{
             type: DataType.INTEGER,
         },
     });

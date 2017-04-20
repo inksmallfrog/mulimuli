@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:43:39
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 14:47:14
+* @Last Modified time: 2017-04-20 11:37:52
 */
 $music_backcolor: #9cc;
 .current_music{
@@ -50,6 +50,13 @@ $music_backcolor: #9cc;
                 margin-top: -70px;
             }
         }
+    }
+    #flies_canvas{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
     }
 }
 .current_music.show{

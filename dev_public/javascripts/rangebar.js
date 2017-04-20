@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 06:49:26
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 16:06:22
+* @Last Modified time: 2017-04-20 16:20:24
 */
 
 'use strict';
@@ -84,6 +84,10 @@ let Rangebar = function(){
                                            this.direction == "horizental" ? e.pageX : e.pageY]);
     });
     this.currentValue = posValue ? posValue : 0;
+
+    $(window).bind('resize', ()=>{
+        this.pointTo(this.currentValue, false);
+    })
 };
 
 Rangebar.prototype.pointTo = function(value, need_callback){
@@ -92,8 +96,8 @@ Rangebar.prototype.pointTo = function(value, need_callback){
 }
 
 Rangebar.prototype.loadedTo = function(value){
-    let $loaded_line = this.view.children('.loaded_line');
-    let percentPos = value / this.max;
+    let $loaded_line = this.view.children('.track').children('.loaded_line');
+    let percentPos = (value / this.max) * 100;
     $loaded_line.css('width', percentPos + '%');
 }
 

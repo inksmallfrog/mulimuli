@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var env = process.env.NODE_ENV || 'development';
 env = env.toLowerCase();
@@ -15,7 +17,7 @@ var config = require('./config/' + env);
 var db = require('./db');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var appusers = require('./routes/appusers');
 var music = require('./routes/music');
 
 var app = express();
@@ -34,6 +36,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: 'Believe it or not, Im the best programmer in the world!',
+  cookie:{
+    maxAge: 30*1000,
+  },
+  store: new RedisStore({
+      port: 6379,
+      host: '127.0.0.1',
+  }),
+  resave: true,
+  saveUninitialized: true,
+}));
 
 if(env == 'development') app.use(express.static(path.join(__dirname, 'dev_public')));
 else if(env == 'production') app.use(express.static(path.join(__dirname, 'public')));
@@ -42,7 +56,7 @@ else throw new Error('Unknown enviroment: ' + env);
 app.use(db.init(config));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/appusers', appusers);
 app.use('/music', music);
 
 // catch 404 and forward to error handler

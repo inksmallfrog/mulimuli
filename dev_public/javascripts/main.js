@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 16:49:50
+* @Last Modified time: 2017-04-20 15:04:13
 */
 
 'use strict';
@@ -11,16 +11,6 @@ let track_timer;
 let time_range;
 let music_list;
 let modes = ["repeat", "repeat_one", "shuffle"];
-
-/*
-used: $('.current_music')
- */
-function bindCurrentMusicEvent(){
-    let $current_music_page = $('.current_music');
-    let reset_current_music = (id) => {
-        //get music info by Ajax
-    }
-}
 
 /*
 used: $('.fly_send > button')
@@ -105,9 +95,12 @@ function makeInitData(){
 }
 
 $(document).ready(function(){
-    makeInitData();
     let music_player_config = {
         audioSelector: '#music',
+        currentPage: {
+            coverSelector: '.music_cover img',
+            fliesCanvasSelector: '#flies_canvas',
+        },
         control: {
             controlItemSelector: '.control_item',
             playorpauseSelector: '#playorpause',
@@ -127,6 +120,7 @@ $(document).ready(function(){
             controlSelector: '.volume_control',
             rangeSelector: '#volume_range',
         },
+        musicFaviconSelector: '#music_favicon img',
         timerangeSelector: '#time_range',
         timerangeTipSelector: '.time_bar_tip',
         currenttimeTipSelector: '#c_time',
@@ -135,7 +129,9 @@ $(document).ready(function(){
         musiclistToggleSelector: '.musiclist_control',
     }
     let music_player = new MusicPlayer(music_player_config);
-    bindCurrentMusicEvent();
+    $(window).bind('resize', ()=>{
+        music_player.resize($(window).width(), $(window).height());
+    });
     bindFlySendEvent();
     bindMusicPageButtonEvent();
     bindFlyControlEvent();
