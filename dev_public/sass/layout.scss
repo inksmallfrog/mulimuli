@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:05:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 00:01:07
+* @Last Modified time: 2017-04-20 20:32:56
 */
 
 $min_PC_width: 980px;
@@ -21,7 +21,7 @@ body{
     height: 100%;
     margin-bottom: $fly_send_height + $music_control_height;
 }
-
+@import '_user_section';
 @import '_current_music';
 @import '_fly_send';
 @import '_music_control';

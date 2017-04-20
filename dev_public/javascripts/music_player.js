@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-19 10:26:24
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 17:25:28
+* @Last Modified time: 2017-04-20 20:32:08
 */
 
 'use strict';
@@ -241,7 +241,16 @@ MusicPlayer.prototype.loadConfigs = function(){
 
     this.volumerange.pointTo(volume_value);
 }
-MusicPlayer.prototype.loadMusicAndMem = function(arg, askPlay, pushNotUnshift){
+MusicPlayer.prototype.loadMusicAndMem = function(){
+    let arg = arguments[0], askPlay, pushNotUnshift;
+    if(arguments.length == 2){
+        askPlay = true;
+        pushNotUnshift = arguments[1] ? arguments[1] : true;
+    }
+    else if(arguments.length == 3){
+        askPlay = arguments[1];
+        pushNotUnshift = arguments[2];
+    }
     this.loadMusic(arg, askPlay);
     if(!pushNotUnshift) this.pushHistory(this.musiclist[this.current_music_index]);
     else this.unshiftHistory(this.musiclist[this.current_music_index]);
@@ -319,14 +328,16 @@ MusicPlayer.prototype.bindDataToMusiclist = function(){
         this.buildMusiclist();
         return;
     }else{
+        const NO_ASKPLAY = false;
+        const MODE_PUSH = true;
         let renderRes = this.listRenderFunc({musiclist: this.musiclist, user: null});
         $(this.view_config.musiclist.ulSelector).html(renderRes);
         $(this.view_config.musiclist.headerTitleSelector).html("播放列表(" + this.musiclist.length + ")");
         if(this.musiclist.length > this.current_music_index && this.current_music_index != -1){
-            this.loadMusicAndMem(this.current_music_index, false);
+            this.loadMusicAndMem(this.current_music_index, NO_ASKPLAY, MODE_PUSH);
         }
         else if(this.musiclist.length > 0){
-            this.loadMusicAndMem(0, false);
+            this.loadMusicAndMem(0, NO_ASKPLAY, MODE_PUSH);
         }
         else{
             this.clear();
@@ -383,25 +394,28 @@ MusicPlayer.prototype.next = function(force_next){
     if(this.played_history_pos > 0){
         let length = this.played_history.length
         --(this.played_history_pos);
-        this.loadMusic(this.played_history[length - this.played_history_pos]);
+        this.loadMusic(this.played_history[this.played_history_pos]);
     }
-    let next_index = -1;
-    let mode = this.play_mode;
-    if(force_next && mode == 1) mode = 0;   //if force_next is true, don't repeat self
-    switch(mode){
-        case 0:
-            next_index = (this.current_music_index + 1) % this.musiclist.length;
-            break;
-        case 1:
-            next_index = this.current_music_index;
-            break;
-        case 2:
-            next_index = Math.floor(Math.random() * this.musiclist.length);
-            break;
-        default:
-            break;
+    else{
+        let next_index = -1;
+        let mode = this.play_mode;
+        if(force_next && mode == 1) mode = 0;   //if force_next is true, don't repeat self
+        switch(mode){
+            case 0:
+                next_index = (this.current_music_index + 1) % this.musiclist.length;
+                break;
+            case 1:
+                next_index = this.current_music_index;
+                break;
+            case 2:
+                next_index = Math.floor(Math.random() * this.musiclist.length);
+                break;
+            default:
+                break;
+        }
+        this.loadMusicAndMem(next_index, MODE_PUSH);
     }
-    this.loadMusicAndMem(next_index, MODE_PUSH);
+
 }
 
 MusicPlayer.prototype.buildTimerange = function(){

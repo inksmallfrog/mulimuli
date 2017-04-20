@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:05:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 00:01:07
+* @Last Modified time: 2017-04-20 20:32:56
 */
 body {
   overflow-y: hidden;
@@ -15,13 +15,89 @@ body {
 
 /*
 * @Author: inksmallfrog
+* @Date:   2017-04-20 20:33:10
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-20 22:17:20
+*/
+.user_section {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  overflow-y: auto;
+  height: calc(100vh - 75px);
+  background: orange; }
+  .user_section .user_data {
+    position: relative;
+    padding: 10px;
+    background: #f63;
+    padding-top: 25px; }
+    .user_section .user_data .close {
+      position: absolute;
+      background: none;
+      color: orange;
+      font-size: 25px;
+      height: 25px;
+      right: 10px;
+      top: 10px; }
+    .user_section .user_data .user_icon {
+      display: inline-block;
+      position: relative;
+      width: 30%;
+      height: 0;
+      padding-bottom: 30%;
+      vertical-align: middle; }
+      .user_section .user_data .user_icon img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%; }
+    .user_section .user_data .user_text {
+      width: 70%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle; }
+    .user_section .user_data .user_info {
+      text-align: center;
+      margin: 10px 0; }
+  .user_section .user_playlists li {
+    display: inline-block;
+    position: relative;
+    width: 48%;
+    margin: 1%;
+    height: 0;
+    padding-bottom: 50%;
+    overflow: hidden; }
+    .user_section .user_playlists li .playlist_cover {
+      position: absolute;
+      width: 100%;
+      height: 100%; }
+    .user_section .user_playlists li .playlist_info {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: 100%;
+      width: 100%;
+      height: 100%;
+      background: silver;
+      opacity: 0.6;
+      transition: top .5s; }
+      .user_section .user_playlists li .playlist_info p {
+        text-align: center; }
+  .user_section .user_playlists li:hover .playlist_info {
+    top: 0; }
+
+/*
+* @Author: inksmallfrog
 * @Date:   2017-04-18 23:43:39
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 11:37:52
+* @Last Modified time: 2017-04-20 20:16:54
 */
 .current_music {
   position: absolute;
-  top: 100vh;
+  top: 0;
   background: #9cc;
   width: 100%;
   height: 100vh;
@@ -65,9 +141,6 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden; }
-
-.current_music.show {
-  top: 0; }
 
 /*
 * @Author: inksmallfrog

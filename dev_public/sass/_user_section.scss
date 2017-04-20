@@ -1,0 +1,96 @@
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-20 20:33:10
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-20 22:17:20
+*/
+
+$user_section_width: 20%;
+$icon_width: 30%;
+$padding: 10px;
+$content_top_dis: 25px;
+.user_section{
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $user_section_width;
+    overflow-y: auto;
+    height:calc(100vh - 75px);
+    background: orange;
+    .user_data{
+        position: relative;
+        padding: $padding;
+        background: #f63;
+        padding-top: $content_top_dis;
+        .close{
+            position: absolute;
+            background: none;
+            color: orange;
+            font-size: $content_top_dis;
+            height: $content_top_dis;
+            right: $padding;
+            top: $padding;
+        }
+        .user_icon{
+            display: inline-block;
+            position: relative;
+            width: $icon_width;
+            height: 0;
+            padding-bottom: $icon_width;
+            vertical-align: middle;
+            img{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+            }
+        }
+        .user_text{
+            width: 100% - $icon_width;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .user_info{
+            text-align: center;
+            margin: 10px 0;
+        }
+    }
+    .user_playlists{
+        li{
+            display: inline-block;
+            position: relative;
+            width: 48%;
+            margin: 1%;
+            height: 0;
+            padding-bottom: 50%;
+            overflow: hidden;
+            .playlist_cover{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+            .playlist_info{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                top: 100%;
+                width: 100%;
+                height: 100%;
+                background: silver;
+                opacity: 0.6;
+                transition: top .5s;
+                p{
+                    text-align: center;
+                }
+            }
+        }
+        li:hover{
+            .playlist_info{
+                top: 0;
+            }
+        }
+    }
+}

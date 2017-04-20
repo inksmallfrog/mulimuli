@@ -14,10 +14,7 @@
         <!--End-->
 
         <!--当前音乐区-->
-        <section class="current_music show">
-            <ul class="control_panel">
-                <li><button class="pointer"><span class="icon-close"></span></button></li>
-            </ul>
+        <section class="current_music">
             <div class="music_content">
                 <figure class="music_cover">
                     <img src="./assets/test.jpg" alt="">
@@ -28,6 +25,41 @@
             <canvas id="flies_canvas"></canvas>
         </section>
         <!--End-->
+
+        <section class="user_section show">
+            <div class="user_data">
+                <button class="close pointer"><span class="icon-close"></span></button>
+                <figure class="user_icon">
+                    <img src="./uploads/user_icons/default.jpg" alt="">
+                </figure><!--
+                --><div class="user_text">
+                    <p class="user_name">缪丽缪丽<span class=""></span></p>
+                    <button class="daily_sign">签到</button><button class="quit">退出</button>
+                </div>
+                <p class="user_info">音乐，构建世界</p>
+            </div>
+            <ul class="user_playlists">
+                <li>
+                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
+                    <div class="playlist_info">
+                        <p class="playlist_title">最喜欢的</p>
+                        <p class="playlist_count">25首</p>
+                    </div>
+                </li><!--
+                --><li>
+                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
+                    <div class="playlist_info">
+
+                    </div>
+                </li><!--
+                --><li>
+                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
+                    <div class="playlist_info">
+
+                    </div>
+                </li>
+            </ul>
+        </section>
 
         <!--隐藏的音频内容-->
         <audio id="music" src="" preload="auto"></audio>
@@ -132,7 +164,6 @@
         <script src="javascripts/template.js"></script>
         <script src="javascripts/jquery-3.2.0.js"></script>
         <script src="javascripts/jquery.cookie.js"></script>
-        <script src="javascripts/jquery.pause.min.js"></script>
         <script src="javascripts/util.js"></script>
         <script src="javascripts/rangebar.js"></script>
         <script src="javascripts/music_player.js"></script>
