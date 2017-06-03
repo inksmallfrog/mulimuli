@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-14 22:38:29
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 09:13:40
+* @Last Modified time: 2017-04-21 10:31:12
 */
 
 'use strict';
@@ -42,7 +42,7 @@ let simpleERBTemplate = function(id){
         return res;
     });
     funcBody += "';return temp;";
-    console.log(funcBody);
+    template_container.parentElement.removeChild(template_container);
     return new Function("data", funcBody);
 }
 

@@ -2,10 +2,16 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:43:39
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 20:16:54
+* @Last Modified time: 2017-06-03 23:01:12
 */
 $music_backcolor: #9cc;
-.current_music{
+@keyframes rotation
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
+}
+
+.music_page{
     position: absolute;
     top: 0;
     background: $music_backcolor;
@@ -37,6 +43,8 @@ $music_backcolor: #9cc;
                 width: 100%;
                 height: 100%;
                 position: absolute;
+                animation: rotation 30s infinite linear;
+                animation-play-state: paused;
             }
             .center_circle{
                 position: absolute;

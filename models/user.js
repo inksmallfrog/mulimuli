@@ -2,37 +2,34 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-17 18:50:10
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 07:56:52
+* @Last Modified time: 2017-04-21 16:00:45
 */
 'use strict';
 function appuserModel(sequelize, DataType){
     var Appuser = sequelize.define('appuser',{
-        email: {
+        log_id: {
             type: DataType.STRING,
             allowNull: false,
             unique: true,
-            validate:{
-                is: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-            },
         },
         pwd: {
             type: DataType.STRING,
-            allowNull: false,
         },
         state: {
-            type: DataType.ENUM("normal", "not verified", "deleted"),
+            type: DataType.ENUM("normal", "not verified", "deleted", "tempory"),
             allowNull: false,
             defaultValue: "not verified",
         },
         name: {
             type: DataType.STRING,
         },
-        male: {
-            type: DataType.BOOLEAN,
+        gender: {
+            type: DataType.ENUM("male", "female"),
+            defaultValue: "female",
         },
         favicon: {
             type: DataType.STRING,
-            defaultValue: 'uploads/favicons/default.jpg',
+            defaultValue: './uploads/user_icons/default.jpg',
         },
         info: {
             type: DataType.STRING,

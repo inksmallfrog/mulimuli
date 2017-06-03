@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-19 10:26:24
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 20:32:08
+* @Last Modified time: 2017-06-03 23:14:49
 */
 
 'use strict';
@@ -51,6 +51,7 @@ let MusicPlayer = function(view_config){
     this.bindMusicEvents();
     this.bindControlEvents();
     this.bindModeEvents();
+    this.bindFlyControlEvents();
     this.bindMusicListToggleEvents();
 
     this.loadMusiclist();
@@ -77,7 +78,6 @@ MusicPlayer.prototype.buildMusiclist = function(){
     if(this.listRenderFunc) return;
     //this.view_config.musiclist.templateSelector must be an id selector!
     this.listRenderFunc = simpleERBTemplate(this.view_config.musiclist.templateSelector);
-    $(this.view_config.musiclist.templateSelector).remove();
 
     this.bindDataToMusiclist();
     //adding favorite
@@ -85,6 +85,13 @@ MusicPlayer.prototype.buildMusiclist = function(){
     //adding marked
     //...
     //using on() replaces delegate()
+    $(this.view_config.musiclist.ulSelector).on('click', (e) => {
+        let $item = $(e.target).parents(this.view_config.musiclist.itemSelector);
+        let musicId = Number.parseInt($item.attr("data-id"));
+        let musicIndex = this.musiclist.findIndex((music)=>{return music.id == musicId})
+        const MODE_PUSH = true;
+        this.loadMusicAndMem(musicIndex, MODE_PUSH);
+    });
     $(this.view_config.musiclist.ulSelector).on('click', this.view_config.musiclist.deleteButtonSelector, (e) => {
         let $item = $(e.target).parents(this.view_config.musiclist.itemSelector);
         let id = $item.attr("data-id");
@@ -221,12 +228,14 @@ MusicPlayer.prototype.bindMusicEvents = function(){
         if(this.fly_on){
             this.flies_animation = window.requestAnimationFrame(this.fliesAnimCallback.bind(this));
         }
+        $(this.view_config.currentPage.coverSelector).css('animation-play-state', 'running');
     }).bind('pause', () => {
         this.stopTimer();
         $(this.view_config.control.playorpauseSelector).children('span').attr("class", "icon-play");
         if(this.fly_on && this.flies_animation){
             window.cancelAnimationFrame(this.flies_animation);
         }
+        $(this.view_config.currentPage.coverSelector).css('animation-play-state', 'paused');
     })
 }
 
@@ -268,7 +277,6 @@ MusicPlayer.prototype.loadMusic = function(arg, askPlay){
         index = this.getMusicIndexById(music.id);
     }
     else return;
-
     $.ajax({
         url: '/music/' + music.id,
         type: 'get',
@@ -311,16 +319,15 @@ MusicPlayer.prototype.loadMusiclist = function(){
                 dataType: "json",
                 success: (data) => {
                     this.musiclist = data.current_playing_list;
-                    this.current_music_index = data.current_music_index;
-                    this.play_mode = data.playmode;
+                    //this.current_music_index = data.current_music_index;
+                    //this.play_mode = data.playmode;
                     this.bindDataToMusiclist();
                 },
             })
         }
     }
     if(this.current_music_index === undefined && this.music_list.length > 0) this.current_music_index = 0;
-    if(this.play_mode === undefined) this.play_mode = 0;
-
+    if(this.play_mode !== this.play_mode) this.play_mode = 0;
     this.bindDataToMusiclist();
 }
 MusicPlayer.prototype.bindDataToMusiclist = function(){
@@ -373,7 +380,7 @@ MusicPlayer.prototype.previous = function(){
     //pos 0 means the music before any operation
     ++(this.played_history_pos);
     if(this.played_history_pos < length){
-        next_index = this.played_history[length - this.played_history_pos - 1];
+        next_index = this.played_history[this.played_history_pos];
         this.loadMusic(next_index);
     }
     else{
@@ -500,6 +507,29 @@ MusicPlayer.prototype.bindControlEvents = function(){
     $(this.view_config.control.previousSelector).bind('click', () => { this.previous(); });
     $(this.view_config.control.playorpauseSelector).bind('click', () => {this.music_view.paused ? this.music_view.play() : this.music_view.pause();});
     $(this.view_config.control.nextSelector).bind('click', () => { this.next(); });
+}
+MusicPlayer.prototype.bindFlyControlEvents = function(){
+    this.fly_on = localStorage.fly_state;
+    this.fly_on = (this.fly_on === undefined) ? true : this.fly_on;
+    $(this.view_config.flyControl).on('click', () => {
+        let switcher = $(this.view_config.flyControl);
+        if(this.fly_on){
+            switcher.removeClass('on').addClass('off');
+            switcher.children('p').html('OFF');
+            $(this.view_config.flySend).addClass('hide');
+            this.fly_on = false;
+            this.flies_canvas_spirits = [];
+            localStorage.fly_state = false;
+            //clear all flys
+        }
+        else{
+            switcher.removeClass('off').addClass('on');
+            switcher.children('p').html('ON');
+            $(this.view_config.flySend).removeClass("hide");
+            this.fly_on = true;
+            localStorage.fly_state = true;
+        }
+    });
 }
 MusicPlayer.prototype.bindModeEvents = function(){
     $(this.view_config.modeSelector).bind('click', () => {

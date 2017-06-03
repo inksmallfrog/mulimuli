@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-20 20:33:10
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 22:17:20
+* @Last Modified time: 2017-04-21 15:15:48
 */
 
 $user_section_width: 20%;
@@ -13,7 +13,11 @@ $content_top_dis: 25px;
     box-sizing: border-box;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -1 * $user_section_width;
+    transition: left .5s;
+    &.show{
+        left: 0;
+    }
     width: $user_section_width;
     overflow-y: auto;
     height:calc(100vh - 75px);
@@ -39,18 +43,45 @@ $content_top_dis: 25px;
             height: 0;
             padding-bottom: $icon_width;
             vertical-align: middle;
-            img{
+            overflow: hidden;
+            border-radius: 100%;
+            img, div{
                 position: absolute;
                 width: 100%;
                 height: 100%;
-                border-radius: 100%;
+            }
+            div{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 150%;
+                top: 100%;
+                transition: top .5s;
+                background: #ccc;
+                opacity: 0.5;
+                text-align: center;
+            }
+            &:hover{
+                div{
+                    top: 0;
+                }
             }
         }
         .user_text{
+            position: relative;
             width: 100% - $icon_width;
             display: inline-block;
             text-align: center;
             vertical-align: middle;
+        }
+        button{
+            background: none;
+            margin: 5px 10px 0 10px;
+            &.daily_sign{
+                width: 40%;
+                border-radius: 10px;
+                border: 1px solid black;
+            }
         }
         .user_info{
             text-align: center;
@@ -76,20 +107,30 @@ $content_top_dis: 25px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                top: 100%;
+                top: 0;
                 width: 100%;
                 height: 100%;
-                background: silver;
-                opacity: 0.6;
+                background: rgba(128, 128, 128, 0.4);
                 transition: top .5s;
+                color: #ccc;
                 p{
                     text-align: center;
                 }
-            }
-        }
-        li:hover{
-            .playlist_info{
-                top: 0;
+                span{
+                    position: absolute;
+                    font-size: 30px;
+                    bottom: 10px;
+                    right: 10px;
+                    &:hover{
+                        color: #eee;
+                    }
+                }
+                &:hover{
+                    background: rgba(128, 128, 128, 0.6);
+                    p{
+                        color: #eee;
+                    }
+                }
             }
         }
     }

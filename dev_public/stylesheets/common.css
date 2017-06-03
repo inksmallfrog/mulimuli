@@ -2,7 +2,37 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-19 08:43:07
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 08:48:48
+* @Last Modified time: 2017-04-21 16:58:45
 */
 .pointer:hover {
   cursor: pointer; }
+
+/*
+* @Author: inksmallfrog
+* @Date:   2017-04-21 16:58:19
+* @Last Modified by:   inksmallfrog
+* @Last Modified time: 2017-04-21 17:08:27
+*/
+.frog_modal {
+  position: fixed;
+  display: flex;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(128, 128, 128, 0.6); }
+
+.modal_content {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  background: white; }
+
+.modal_close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  font-size: 30px; }

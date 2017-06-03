@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 08:39:57
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 08:24:34
+* @Last Modified time: 2017-04-21 13:55:08
 */
 
 'use strict';
@@ -15,6 +15,7 @@ let Music;
 let Album;
 let Playlist;
 let Fly;
+let MusicInPlaylist;
 let PlaylistMusic;
 
 let database;
@@ -101,11 +102,11 @@ function createHooks(){
 
 function insertInitData(){
     let rootuser = Appuser.create({
-        email: 'mulimuli@mulimuli.com',
+        log_id: 'mulimuli@mulimuli.com',
         pwd: 'mulimuli_root',
         state: 'normal',
         name: '缪丽缪丽',
-        male: false,
+        gender: 'female',
     });
     let m0 = Music.create({
         title: "さくらの季节",
@@ -167,36 +168,39 @@ function insertInitData(){
         }));
         return Promise.all(flies);
     }).then((values) => {
-        rootuser.getPlaylists({
+        return rootuser.getPlaylists({
             where: {
                 title: "playing",
                 list_type: "default",
             }
-        }).then((playings)=>{
-            playings[0].addMusic(m0);
-            playings[0].addMusic(m1);
-            playings[0].addMusic(m2);
-        });
-    })
+        })
+    }).then((playings)=>{
+        let a = playings[0].addMusic(m0);
+        let b = playings[0].addMusic(m1);
+        let c = playings[0].addMusic(m2);
+        return Promise.all([a, b, c]);
+    });
 }
 
 exports.init = (config) => {
     initDatabase(config).then((db)=>{
         database = db;
-        db.sequelize.sync().then(function () {
+        return db.sequelize.sync().then(function () {
             console.log('models synced');
             Appuser = db.getModel('appuser');
             Music = db.getModel('music');
             Album = db.getModel('album');
             Playlist = db.getModel('playlist');
             Fly = db.getModel('fly');
+            MusicInPlaylist = db.getModel('music_in_playlist');
             createAssociations();
             createHooks();
             insertInitData();
         });
     }).catch((err)=>{
         console.log(err);
-    })
+    });
+
     return (req, res, next) => {
         req.models = database.sequelize.models;
         next();

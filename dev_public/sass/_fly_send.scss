@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:14:23
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-18 23:17:51
+* @Last Modified time: 2017-06-03 23:15:38
 */
 .fly_send{
     position: absolute;
@@ -22,4 +22,8 @@
         width: 5%;
         vertical-align: bottom;
     }
+    transition: bottom .5s;
+}
+.fly_send.hide{
+    bottom: $music_control_height - $fly_send_height;
 }

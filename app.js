@@ -35,7 +35,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('Im the best programmer in the world!'));
 app.use(session({
   secret: 'Believe it or not, Im the best programmer in the world!',
   cookie:{

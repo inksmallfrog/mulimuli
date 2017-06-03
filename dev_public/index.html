@@ -14,7 +14,12 @@
         <!--End-->
 
         <!--当前音乐区-->
-        <section class="current_music">
+        <section class="music_page">
+            <ul class="control_group">
+                <li class="control" id="show_user_info"><button>用户</button></li>
+                <li class="control"></li>
+                <li class="control"></li>
+            </ul>
             <div class="music_content">
                 <figure class="music_cover">
                     <img src="./assets/test.jpg" alt="">
@@ -26,38 +31,34 @@
         </section>
         <!--End-->
 
-        <section class="user_section show">
+        <section class="user_section">
             <div class="user_data">
+                <script id="user_template" type="text/html">
                 <button class="close pointer"><span class="icon-close"></span></button>
-                <figure class="user_icon">
-                    <img src="./uploads/user_icons/default.jpg" alt="">
+                <figure class="user_icon pointer">
+                    <img src="<%=data.user.favicon%>" alt="">
+                    <div><span class="icon-config"></span></div>
                 </figure><!--
                 --><div class="user_text">
-                    <p class="user_name">缪丽缪丽<span class=""></span></p>
-                    <button class="daily_sign">签到</button><button class="quit">退出</button>
+                    <p class="user_name"><%=data.user.name%><span class="icon-<%=data.user.gender%>"></span></p>
+                    <button class="daily_sign">签到</button><button class="quit pointer"><span class="icon-exit"></span></button>
                 </div>
-                <p class="user_info">音乐，构建世界</p>
+                <p class="user_info"><%=data.user.info%></p><%=%>
+                </script>
             </div>
             <ul class="user_playlists">
-                <li>
-                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
-                    <div class="playlist_info">
-                        <p class="playlist_title">最喜欢的</p>
-                        <p class="playlist_count">25首</p>
-                    </div>
-                </li><!--
-                --><li>
-                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
-                    <div class="playlist_info">
-
-                    </div>
-                </li><!--
-                --><li>
-                    <img src="./uploads/music_covers/a_hisa - ほたる火.jpg" alt="" class="playlist_cover">
-                    <div class="playlist_info">
-
-                    </div>
-                </li>
+                <script id="user_playlist_template" type="text/html">
+                    <%for(var i; i < data.user.playlists.length; ++i){%>
+                    <li class="pointer" data-id="<%=data.user.playlists[i].id%>">
+                        <img src="<%=data.user.playlists[i].favicon" alt="" class="playlist_cover">
+                        <div class="playlist_info">
+                            <p class="playlist_title">data.user.playlists[i].title</p>
+                            <p class="playlist_count">data.user.playlists[i].musicCount</p>
+                            <span class="icon-play"></span>
+                        </div>
+                    </li>
+                    <%}%>
+                </script>
             </ul>
         </section>
 
@@ -72,7 +73,7 @@
         <!--End-->
 
         <!--控制板-->
-        <div class="control">
+        <div class="music_control">
             <div class="control_panel">
                 <div class="panel_group">
                     <a href="javascript:void(0)" id="music_favicon">
@@ -161,12 +162,16 @@
             </div>
         </div>
         <!--End-->
+        <script src="javascripts/global.js"></script>
+        <script src="javascripts/modal.js"></script>
         <script src="javascripts/template.js"></script>
         <script src="javascripts/jquery-3.2.0.js"></script>
         <script src="javascripts/jquery.cookie.js"></script>
         <script src="javascripts/util.js"></script>
         <script src="javascripts/rangebar.js"></script>
         <script src="javascripts/music_player.js"></script>
+        <script src="javascripts/user.js"></script>
+        <script src="javascripts/music_page.js"></script>
         <script src="javascripts/main.js"></script>
     </body>
 </html>

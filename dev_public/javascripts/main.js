@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 15:04:13
+* @Last Modified time: 2017-06-03 23:08:42
 */
 
 'use strict';
@@ -28,20 +28,6 @@ function bindFlySendEvent(){
         else{
             //send fly with ajax
             //insertFly(text);
-        }
-    });
-}
-/*
-used: $('#music_favicon')
-      music
-      $current_music_page
- */
-function bindMusicPageButtonEvent(){
-    $('#music_favicon').bind('click', () => {
-        if(!music.currentSrc) return;
-        if(!$current_music_page.hasClass("show")) {
-            $current_music_page.addClass("show");
-            $current_music_page.removeAttr("aria-hidden");
         }
     });
 }
@@ -73,27 +59,6 @@ function bindFlyControlEvent(){
     });
 }
 
-function makeInitData(){
-    localStorage.user_music = '[ \
-                            {"id": 0, \
-                             "src": "./uploads/music/38BEETS - さくらの季节.mp3", \
-                             "title": "さくらの季节", \
-                             "author": "38BEETS", \
-                             "duration": "3:23"}, \
-                            {"id": 1, \
-                             "src": "./uploads/music/a_hisa - ほたる火.mp3", \
-                             "title": "ほたる火", \
-                             "author": "a_hisa", \
-                             "duration": "5:30"}, \
-                            {"id": 2, \
-                             "src": "./uploads/music/Key Sounds Label - 鳥の詩 (short version).mp3", \
-                             "title": "鳥の詩 (short version)", \
-                             "author": "Key Sounds Label", \
-                             "duration": "2:12"}\
-                           ]';
-    localStorage.music_index = 0;
-}
-
 $(document).ready(function(){
     let music_player_config = {
         audioSelector: '#music',
@@ -120,19 +85,44 @@ $(document).ready(function(){
             controlSelector: '.volume_control',
             rangeSelector: '#volume_range',
         },
+        flySend: '.fly_send',
         musicFaviconSelector: '#music_favicon img',
         timerangeSelector: '#time_range',
         timerangeTipSelector: '.time_bar_tip',
         currenttimeTipSelector: '#c_time',
         durationTipSelector: '#a_time',
         modeSelector: '#play_mode',
+        flyControl: '.switch',
         musiclistToggleSelector: '.musiclist_control',
+    };
+    let user_config = {
+        sectionSelector: '.user_section',
+        userDataSelector: '.user_data',
+        userPlaylistSelector: '.user_playlist',
+        userInfoTemplateSelector: '#user_template',
+        userPlaylistTemplateSelector: '#user_playlist_template',
+        controls:{
+            closeSelector: '.user_data .close',
+            settingSelector: '.user_data .user_icon',
+            signSelector: '.daily_sign',
+            quitSelector: '.user_data .quit',
+            gotoPlaylistSelector: '.user_playlists li',
+            playPlaylistSelector: '.playlist_info span',
+        },
+    };
+    let music_page_config = {
+        sectionSelector: '.music_page',
+        controls: {
+            userInfoButtonSelector: '#show_user_info',
+        },
     }
-    let music_player = new MusicPlayer(music_player_config);
+    module.music_player = new MusicPlayer(music_player_config);
+    module.user = new User(user_config);
+    module.music_page = new MusicPage(music_page_config);
+
     $(window).bind('resize', ()=>{
-        music_player.resize($(window).width(), $(window).height());
+        module.music_player.resize($(window).width(), $(window).height());
     });
     bindFlySendEvent();
-    bindMusicPageButtonEvent();
     bindFlyControlEvent();
 });

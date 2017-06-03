@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:05:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 20:32:56
+* @Last Modified time: 2017-04-21 15:31:11
 */
 body {
   overflow-y: hidden;
@@ -17,17 +17,20 @@ body {
 * @Author: inksmallfrog
 * @Date:   2017-04-20 20:33:10
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 22:17:20
+* @Last Modified time: 2017-04-21 15:15:48
 */
 .user_section {
   box-sizing: border-box;
   position: absolute;
   top: 0;
-  left: 0;
+  left: -20%;
+  transition: left .5s;
   width: 20%;
   overflow-y: auto;
   height: calc(100vh - 75px);
   background: orange; }
+  .user_section.show {
+    left: 0; }
   .user_section .user_data {
     position: relative;
     padding: 10px;
@@ -47,17 +50,38 @@ body {
       width: 30%;
       height: 0;
       padding-bottom: 30%;
-      vertical-align: middle; }
-      .user_section .user_data .user_icon img {
+      vertical-align: middle;
+      overflow: hidden;
+      border-radius: 100%; }
+      .user_section .user_data .user_icon img, .user_section .user_data .user_icon div {
         position: absolute;
         width: 100%;
-        height: 100%;
-        border-radius: 100%; }
+        height: 100%; }
+      .user_section .user_data .user_icon div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 150%;
+        top: 100%;
+        transition: top .5s;
+        background: #ccc;
+        opacity: 0.5;
+        text-align: center; }
+      .user_section .user_data .user_icon:hover div {
+        top: 0; }
     .user_section .user_data .user_text {
+      position: relative;
       width: 70%;
       display: inline-block;
       text-align: center;
       vertical-align: middle; }
+    .user_section .user_data button {
+      background: none;
+      margin: 5px 10px 0 10px; }
+      .user_section .user_data button.daily_sign {
+        width: 40%;
+        border-radius: 10px;
+        border: 1px solid black; }
     .user_section .user_data .user_info {
       text-align: center;
       margin: 10px 0; }
@@ -78,54 +102,71 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      top: 100%;
+      top: 0;
       width: 100%;
       height: 100%;
-      background: silver;
-      opacity: 0.6;
-      transition: top .5s; }
+      background: rgba(128, 128, 128, 0.4);
+      transition: top .5s;
+      color: #ccc; }
       .user_section .user_playlists li .playlist_info p {
         text-align: center; }
-  .user_section .user_playlists li:hover .playlist_info {
-    top: 0; }
+      .user_section .user_playlists li .playlist_info span {
+        position: absolute;
+        font-size: 30px;
+        bottom: 10px;
+        right: 10px; }
+        .user_section .user_playlists li .playlist_info span:hover {
+          color: #eee; }
+      .user_section .user_playlists li .playlist_info:hover {
+        background: rgba(128, 128, 128, 0.6); }
+        .user_section .user_playlists li .playlist_info:hover p {
+          color: #eee; }
 
 /*
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:43:39
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 20:16:54
+* @Last Modified time: 2017-06-03 23:01:12
 */
-.current_music {
+@keyframes rotation {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.music_page {
   position: absolute;
   top: 0;
   background: #9cc;
   width: 100%;
   height: 100vh;
   transition: top .5s; }
-  .current_music .control_panel {
+  .music_page .control_panel {
     position: absolute;
     right: 5%;
     top: 50px; }
-    .current_music .control_panel button {
+    .music_page .control_panel button {
       width: 50px;
       height: 50px;
       background: rgba(200, 200, 200, 0.6);
       font-size: 20px; }
-  .current_music .music_content {
+  .music_page .music_content {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
     padding: 50px; }
-    .current_music .music_content .music_cover {
+    .music_page .music_content .music_cover {
       width: 500px;
       height: 500px;
       position: relative; }
-      .current_music .music_content .music_cover img {
+      .music_page .music_content .music_cover img {
         border-radius: 100%;
         width: 100%;
         height: 100%;
-        position: absolute; }
-      .current_music .music_content .music_cover .center_circle {
+        position: absolute;
+        animation: rotation 30s infinite linear;
+        animation-play-state: paused; }
+      .music_page .music_content .music_cover .center_circle {
         position: absolute;
         border-radius: 100%;
         width: 140px;
@@ -135,7 +176,7 @@ body {
         margin-left: -70px;
         top: 50%;
         margin-top: -70px; }
-  .current_music #flies_canvas {
+  .music_page #flies_canvas {
     position: absolute;
     top: 0;
     width: 100%;
@@ -146,7 +187,7 @@ body {
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:14:23
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-18 23:17:51
+* @Last Modified time: 2017-06-03 23:15:38
 */
 .fly_send {
   position: absolute;
@@ -154,7 +195,8 @@ body {
   line-height: 25px;
   height: 25px;
   bottom: 50px;
-  width: 100%; }
+  width: 100%;
+  transition: bottom .5s; }
   .fly_send input {
     height: 25px;
     box-sizing: border-box;
@@ -165,13 +207,16 @@ body {
     width: 5%;
     vertical-align: bottom; }
 
+.fly_send.hide {
+  bottom: 25px; }
+
 /*
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:18:31
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 15:03:16
+* @Last Modified time: 2017-06-03 23:13:25
 */
-.control {
+.music_control {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -180,10 +225,10 @@ body {
   height: 50px;
   user-select: none;
   background-color: #f63; }
-  .control button {
+  .music_control button {
     background: none;
     color: white; }
-  .control .control_panel {
+  .music_control .control_panel {
     position: relative;
     display: flex;
     display: -webkit-flex;
@@ -191,14 +236,14 @@ body {
     width: 94%;
     min-width: 980px;
     margin: 0 auto; }
-    .control .control_panel .panel_group {
+    .music_control .control_panel .panel_group {
       position: relative;
       text-align: center;
       /*
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:31:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 17:07:14
+* @Last Modified time: 2017-04-21 08:39:04
 */
       /*
 * @Author: inksmallfrog
@@ -206,34 +251,34 @@ body {
 * @Last Modified by:   inksmallfrog
 * @Last Modified time: 2017-04-20 16:21:33
 */ }
-      .control .control_panel .panel_group #music_favicon {
+      .music_control .control_panel .panel_group #music_favicon {
         position: relative;
         display: inline-block;
         height: 35px;
         width: 35px;
         vertical-align: middle; }
-        .control .control_panel .panel_group #music_favicon img {
+        .music_control .control_panel .panel_group #music_favicon img {
           border-radius: 100%;
           width: 100%;
           height: 100%; }
-      .control .control_panel .panel_group .time_tip {
+      .music_control .control_panel .panel_group .time_tip {
         vertical-align: middle;
         color: #eee;
         font-size: 10px; }
-      .control .control_panel .panel_group .play_mode {
+      .music_control .control_panel .panel_group .play_mode {
         vertical-align: middle;
         font-size: 20px;
         padding-right: 10px; }
-      .control .control_panel .panel_group .music_list_control {
+      .music_control .control_panel .panel_group .music_list_control {
         vertical-align: middle;
         font-size: 25px;
         margin-left: 10px;
         padding-top: 3px; }
-      .control .control_panel .panel_group .musiclist_control {
+      .music_control .control_panel .panel_group .musiclist_control {
         font-size: 25px;
         padding-top: 5px;
         vertical-align: middle; }
-      .control .control_panel .panel_group .musiclist {
+      .music_control .control_panel .panel_group .musiclist {
         position: absolute;
         display: none;
         bottom: 50px;
@@ -241,9 +286,8 @@ body {
         width: 0;
         height: 0;
         background: green;
-        z-index: 10;
-        overflow: hidden; }
-        .control .control_panel .panel_group .musiclist .header {
+        z-index: 10; }
+        .music_control .control_panel .panel_group .musiclist .header {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -252,20 +296,20 @@ body {
           padding: 0 20px;
           line-height: 30px;
           margin-bottom: 10px; }
-          .control .control_panel .panel_group .musiclist .header p {
+          .music_control .control_panel .panel_group .musiclist .header p {
             flex-grow: 20; }
-        .control .control_panel .panel_group .musiclist button {
+        .music_control .control_panel .panel_group .musiclist button {
           font-size: 20px;
           background: none;
           vertical-align: middle;
           flex-grow: 0; }
-          .control .control_panel .panel_group .musiclist button span {
+          .music_control .control_panel .panel_group .musiclist button span {
             line-height: 30px; }
-        .control .control_panel .panel_group .musiclist .small_font {
+        .music_control .control_panel .panel_group .musiclist .small_font {
           font-size: 10px;
           flex-grow: 1;
           margin-right: 20px; }
-        .control .control_panel .panel_group .musiclist .bottom_triangle {
+        .music_control .control_panel .panel_group .musiclist .bottom_triangle {
           position: absolute;
           right: 33px;
           bottom: -20px;
@@ -273,64 +317,66 @@ body {
           border-right: transparent solid 10px;
           border-top: green 10px solid;
           border-bottom: transparent 10px solid; }
-        .control .control_panel .panel_group .musiclist .music_item {
-          position: relative;
-          line-height: 18px;
-          padding: 3px 20px;
-          text-align: left; }
-          .control .control_panel .panel_group .musiclist .music_item:hover {
-            cursor: pointer;
-            background: white; }
-          .control .control_panel .panel_group .musiclist .music_item .mark_icon, .control .control_panel .panel_group .musiclist .music_item .music_title, .control .control_panel .panel_group .musiclist .music_item .music_artist, .control .control_panel .panel_group .musiclist .music_item .music_duration {
-            display: inline-block; }
-          .control .control_panel .panel_group .musiclist .music_item .mark_icon {
-            visibility: hidden; }
-          .control .control_panel .panel_group .musiclist .music_item .music_title {
-            width: 40%; }
-          .control .control_panel .panel_group .musiclist .music_item .music_artist {
-            width: 30%; }
-          .control .control_panel .panel_group .musiclist .music_item .music_duration {
-            width: 10%; }
-          .control .control_panel .panel_group .musiclist .music_item button {
-            margin: 0 10px;
-            text-align: right;
-            color: silver; }
-            .control .control_panel .panel_group .musiclist .music_item button:last-child {
-              margin-right: 0; }
-            .control .control_panel .panel_group .musiclist .music_item button:hover {
-              color: #666; }
-            .control .control_panel .panel_group .musiclist .music_item button span {
-              line-height: 18px; }
-        .control .control_panel .panel_group .musiclist .music_item.current .mark_icon {
-          visibility: visible; }
-      .control .control_panel .panel_group .range.horizental {
+        .music_control .control_panel .panel_group .musiclist .music_ul {
+          overflow: hidden; }
+          .music_control .control_panel .panel_group .musiclist .music_ul .music_item {
+            position: relative;
+            line-height: 18px;
+            padding: 3px 20px;
+            text-align: left; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item:hover {
+              cursor: pointer;
+              background: white; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item .mark_icon, .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_title, .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_artist, .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_duration {
+              display: inline-block; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item .mark_icon {
+              visibility: hidden; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_title {
+              width: 40%; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_artist {
+              width: 30%; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item .music_duration {
+              width: 10%; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item button {
+              margin: 0 10px;
+              text-align: right;
+              color: silver; }
+              .music_control .control_panel .panel_group .musiclist .music_ul .music_item button:last-child {
+                margin-right: 0; }
+              .music_control .control_panel .panel_group .musiclist .music_ul .music_item button:hover {
+                color: #666; }
+              .music_control .control_panel .panel_group .musiclist .music_ul .music_item button span {
+                line-height: 18px; }
+            .music_control .control_panel .panel_group .musiclist .music_ul .music_item.current .mark_icon {
+              visibility: visible; }
+      .music_control .control_panel .panel_group .range.horizental {
         position: relative;
         display: inline-block;
         height: 16px;
         vertical-align: middle;
         background: none; }
-        .control .control_panel .panel_group .range.horizental .track {
+        .music_control .control_panel .panel_group .range.horizental .track {
           position: absolute;
           height: 10px;
           top: 50%;
           margin-top: -5px;
           width: 100%; }
-        .control .control_panel .panel_group .range.horizental .visible_line, .control .control_panel .panel_group .range.horizental .loaded_line, .control .control_panel .panel_group .range.horizental .track_line {
+        .music_control .control_panel .panel_group .range.horizental .visible_line, .music_control .control_panel .panel_group .range.horizental .loaded_line, .music_control .control_panel .panel_group .range.horizental .track_line {
           position: absolute;
           height: 4px;
           top: 50%;
           left: 0;
           border-radius: 10px;
           margin-top: -2px; }
-        .control .control_panel .panel_group .range.horizental .loaded_line {
+        .music_control .control_panel .panel_group .range.horizental .loaded_line {
           width: 0;
           background-color: #3c7;
           z-index: 1; }
-        .control .control_panel .panel_group .range.horizental .track_line {
+        .music_control .control_panel .panel_group .range.horizental .track_line {
           width: 100%;
           background-color: #999;
           z-index: 0; }
-        .control .control_panel .panel_group .range.horizental .point {
+        .music_control .control_panel .panel_group .range.horizental .point {
           box-sizing: border-box;
           position: absolute;
           height: 12px;
@@ -342,27 +388,27 @@ body {
           border: white solid 4px;
           background: #3c7;
           z-index: 2; }
-    .control .control_panel .grow_control {
+    .music_control .control_panel .grow_control {
       flex-grow: 1; }
-      .control .control_panel .grow_control .control_item {
+      .music_control .control_panel .grow_control .control_item {
         position: relative;
         border-radius: 100%;
         vertical-align: middle;
         background: transparent;
         color: white; }
-        .control .control_panel .grow_control .control_item:disabled {
+        .music_control .control_panel .grow_control .control_item:disabled {
           color: #ccc !important; }
-      .control .control_panel .grow_control .control_item.small {
+      .music_control .control_panel .grow_control .control_item.small {
         width: 25px;
         height: 25px; }
-        .control .control_panel .grow_control .control_item.small span {
+        .music_control .control_panel .grow_control .control_item.small span {
           font-size: 25px; }
-      .control .control_panel .grow_control .control_item.big {
+      .music_control .control_panel .grow_control .control_item.big {
         width: 35px;
         height: 35px; }
-        .control .control_panel .grow_control .control_item.big span {
+        .music_control .control_panel .grow_control .control_item.big span {
           font-size: 35px; }
-      .control .control_panel .grow_control .switch {
+      .music_control .control_panel .grow_control .switch {
         position: relative;
         width: 55px;
         height: 25px;
@@ -371,7 +417,7 @@ body {
         margin: 0 10px;
         box-shadow: 1px 1px 3px rgba(100, 100, 100, 0.2);
         transition: background .5s; }
-        .control .control_panel .grow_control .switch div {
+        .music_control .control_panel .grow_control .switch div {
           position: absolute;
           width: 25px;
           line-height: 25px;
@@ -379,46 +425,47 @@ body {
           background: white;
           box-shadow: 3px 3px 3px rgba(100, 100, 100, 0.2);
           transition: left .5s; }
-        .control .control_panel .grow_control .switch p {
+        .music_control .control_panel .grow_control .switch p {
           line-height: 25px;
           font-size: 10px; }
-      .control .control_panel .grow_control .switch.on {
+      .music_control .control_panel .grow_control .switch.on {
         background: #c69; }
-        .control .control_panel .grow_control .switch.on div {
+        .music_control .control_panel .grow_control .switch.on div {
           left: 0; }
-        .control .control_panel .grow_control .switch.on p {
+        .music_control .control_panel .grow_control .switch.on p {
           float: right;
           padding-right: 5px; }
-      .control .control_panel .grow_control .switch.off {
+      .music_control .control_panel .grow_control .switch.off {
         background-color: white; }
-        .control .control_panel .grow_control .switch.off div {
+        .music_control .control_panel .grow_control .switch.off div {
           left: 30px; }
-        .control .control_panel .grow_control .switch.off p {
+        .music_control .control_panel .grow_control .switch.off p {
+          color: #000;
           float: left;
           padding-left: 5px; }
-    .control .control_panel .grow_volume {
+    .music_control .control_panel .grow_volume {
       flex-grow: 3;
       text-align: left; }
-      .control .control_panel .grow_volume .volume_control {
+      .music_control .control_panel .grow_volume .volume_control {
         vertical-align: middle;
         background: none;
         color: white;
         font-size: 15px;
         padding-right: 5px; }
-      .control .control_panel .grow_volume #volume_range {
+      .music_control .control_panel .grow_volume #volume_range {
         width: 45%; }
-    .control .control_panel .grow_timerange {
+    .music_control .control_panel .grow_timerange {
       flex-grow: 20; }
-      .control .control_panel .grow_timerange .time_bar_tip {
+      .music_control .control_panel .grow_timerange .time_bar_tip {
         position: absolute;
         display: none;
         top: -8px;
         line-height: 25px; }
-        .control .control_panel .grow_timerange .time_bar_tip p {
+        .music_control .control_panel .grow_timerange .time_bar_tip p {
           width: 50px;
           text-align: center;
           background-color: yellow; }
-        .control .control_panel .grow_timerange .time_bar_tip .bottom_triangle {
+        .music_control .control_panel .grow_timerange .time_bar_tip .bottom_triangle {
           position: absolute;
           border-top: 5px solid yellow;
           border-right: transparent 5px solid;
@@ -426,5 +473,5 @@ body {
           border-bottom: transparent 5px solid;
           left: 50%;
           margin-left: -2.5px; }
-      .control .control_panel .grow_timerange #time_range {
+      .music_control .control_panel .grow_timerange #time_range {
         width: 98%; }

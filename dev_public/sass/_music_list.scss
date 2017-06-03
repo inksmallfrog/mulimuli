@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:31:33
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-19 17:07:14
+* @Last Modified time: 2017-04-21 08:39:04
 */
 $item_line_height: 18px;
 .musiclist{
@@ -14,7 +14,7 @@ $item_line_height: 18px;
     height: 0;
     background: green;
     z-index: 10;
-    overflow: hidden;
+
 
     .header{
         display: flex;
@@ -55,49 +55,51 @@ $item_line_height: 18px;
         border-top: green 10px solid;
         border-bottom: transparent 10px solid;
     }
-
-    .music_item{
-        position: relative;
-        line-height: $item_line_height;
-        padding: 3px 20px;
-        text-align: left;
-        &:hover{
-            cursor: pointer;
-            background: white;
-        }
-        .mark_icon, .music_title, .music_artist, .music_duration{
-            display: inline-block;
-        }
-        .mark_icon{
-            visibility: hidden;
-        }
-        .music_title{
-            width: 40%;
-        }
-        .music_artist{
-            width: 30%;
-        }
-        .music_duration{
-            width: 10%;
-        }
-        button{
-            margin: 0 10px;
-            text-align: right;
-            color: silver;
-            &:last-child{
-                margin-right: 0;
-            }
+    .music_ul{
+        overflow: hidden;
+        .music_item{
+            position: relative;
+            line-height: $item_line_height;
+            padding: 3px 20px;
+            text-align: left;
             &:hover{
-                color: #666;
+                cursor: pointer;
+                background: white;
             }
-            span{
-                line-height: $item_line_height;
+            .mark_icon, .music_title, .music_artist, .music_duration{
+                display: inline-block;
             }
-        }
-    }
-    .music_item.current{
-        .mark_icon{
-            visibility:visible;
+            .mark_icon{
+                visibility: hidden;
+            }
+            .music_title{
+                width: 40%;
+            }
+            .music_artist{
+                width: 30%;
+            }
+            .music_duration{
+                width: 10%;
+            }
+            button{
+                margin: 0 10px;
+                text-align: right;
+                color: silver;
+                &:last-child{
+                    margin-right: 0;
+                }
+                &:hover{
+                    color: #666;
+                }
+                span{
+                    line-height: $item_line_height;
+                }
+            }
+            &.current{
+                .mark_icon{
+                    visibility:visible;
+                }
+            }
         }
     }
 }

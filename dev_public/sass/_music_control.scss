@@ -2,13 +2,13 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:18:31
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-04-20 15:03:16
+* @Last Modified time: 2017-06-03 23:13:25
 */
 $music_favicon_size: 35px;
 $big_icon_size: 35px;
 $small_icon_size: 25px;
 
-.control{
+.music_control{
     position: absolute;
     left: 0;
     bottom: 0;
@@ -135,6 +135,7 @@ $small_icon_size: 25px;
                     left: 30px;
                 }
                 p{
+                    color: #000;
                     float: left;
                     padding-left: 5px;
                 }
