@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-19 10:26:24
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-06-03 23:14:49
+* @Last Modified time: 2017-06-04 09:00:08
 */
 
 'use strict';
@@ -131,15 +131,17 @@ MusicPlayer.prototype.addFlyToCanvas = function(fly){
         x: box_width,
         y: 0,
         speed: 1,
-        height: -1,
+        height: 22,
         width: -1,
+        isFullyShow: false,
         draw: function(){
-            ctx.font = "22px serif";
+            ctx.font = "22pt serif";
             ctx.textBaseline = "top";
-            if(this.height < 0){
-                let fly_size = ctx.measureText(fly.content);
-                this.height = fly_size.height;
-                this.width = fly_size.width;
+            if(this.width < 0){
+                this.width = ctx.measureText(fly.content).width;
+            }
+            if(!this.isFullyShow && this.x + this.width + 50 < box_width){
+                this.isFullyShow = true;
             }
             ctx.fillText(fly.content, this.x, this.y);
         },
@@ -150,13 +152,15 @@ MusicPlayer.prototype.addFlyToCanvas = function(fly){
             return this.x < -this.width;
         }
     };
-    let length = this.flies_canvas_spirits.length, spirit;
+    let length = this.flies_canvas_spirits.length,
+        spirit;
     for(let i = 0; i < length; ++i){
         spirit = this.flies_canvas_spirits[i];
-        if(spirit.x + spirit.width + 50 < box_width) continue;
-        else {
+        if(spirit.isFullyShow){
+            continue;
+        }
+        else if(current_fly.y == spirit.y) {
             current_fly.y = spirit.y + spirit.height + 20;
-            break;
         }
     }
     this.flies_canvas_spirits.push(current_fly);

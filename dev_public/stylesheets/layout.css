@@ -187,7 +187,7 @@ body {
 * @Author: inksmallfrog
 * @Date:   2017-04-18 23:14:23
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-06-03 23:15:38
+* @Last Modified time: 2017-06-04 09:01:45
 */
 .fly_send {
   position: absolute;
@@ -205,7 +205,11 @@ body {
   .fly_send button {
     height: 25px;
     width: 5%;
-    vertical-align: bottom; }
+    vertical-align: bottom;
+    cursor: pointer;
+    transition: background 2s; }
+  .fly_send button:hover {
+    background: #3c6; }
 
 .fly_send.hide {
   bottom: 25px; }

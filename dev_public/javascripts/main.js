@@ -2,7 +2,7 @@
 * @Author: inksmallfrog
 * @Date:   2017-04-06 07:53:59
 * @Last Modified by:   inksmallfrog
-* @Last Modified time: 2017-06-03 23:08:42
+* @Last Modified time: 2017-06-04 08:44:20
 */
 
 'use strict';
@@ -18,43 +18,26 @@ used: $('.fly_send > button')
  */
 function bindFlySendEvent(){
     $('.fly_send > button').bind('click', () => {
-        if(/*!user.logged*/true){
-            //showLogginModal()
-        }
-        let fly_content = $('.fly_send > input').value.trim();
-        if(!fly_content){
-            //showErr(flyError, "请输入字幕内容哟")
-        }
-        else{
-            //send fly with ajax
-            //insertFly(text);
-        }
-    });
-}
-
-/*
-used: $('.switch')
-      $('.fly_send')
- */
-function bindFlyControlEvent(){
-    let fly_on = localStorage.fly_state;
-    fly_on = (fly_on === undefined) ? true : fly_on;
-    $('.switch').on('click', () => {
-        let switcher = $('.switch');
-        if(fly_on){
-            switcher.removeClass('on').addClass('off');
-            switcher.children('p').html('OFF');
-            $('.fly_send').slideToggle("fast");
-            fly_on = false;
-            localStorage.fly_state = false;
-            //clear all flys
-        }
-        else{
-            switcher.removeClass('off').addClass('on');
-            switcher.children('p').html('ON');
-            $('.fly_send').slideToggle("fast");
-            fly_on = true;
-            localStorage.fly_state = true;
+        let fly_content = $('.fly_send > input').val().trim();
+        let currentMusicIndex = module.music_player.current_music_index;
+        if(fly_content && currentMusicIndex > -1){
+            $.ajax({
+                url: "/bullets",
+                type: "post",
+                dataType: "json",
+                data: {
+                    text: fly_content,
+                    musicId: module.music_player.musiclist[currentMusicIndex].id,
+                    showtime: Math.ceil(module.music_player.music_view.currentTime)
+                },
+                success: ()=>{
+                    $('.fly_send > input').val('');
+                    module.music_player.addFlyToCanvas({content: fly_content});
+                },
+                error: (err) => {
+                    alert('弹幕发送失败，请检查网络链接状况');
+                },
+            })
         }
     });
 }
@@ -124,5 +107,4 @@ $(document).ready(function(){
         module.music_player.resize($(window).width(), $(window).height());
     });
     bindFlySendEvent();
-    bindFlyControlEvent();
 });
